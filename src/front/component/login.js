@@ -8,10 +8,10 @@ import HeaderPedido from "./headerPedido"
 import { CartContext } from "../context/context"
 import axios from 'axios';
 import Pedido from "./pedido";
-
+import { Oval } from 'react-loader-spinner'
 import "./style/login.css"
 export default function Login(){
-  
+    const [spinner, setSpinner] = useState(true)
     const navigate = useNavigate();
 
     const [logIn, setLogIn]= useState(true)
@@ -78,12 +78,16 @@ export default function Login(){
     const handleSubmit = ((e) => {
         e.preventDefault()
         axios.post("https://server-4w73.onrender.com/register", data).then((res) => {
-           try {
-           
-               setError(res.data.msg)
-           } catch (error) {
-              
-           }
+            
+                setSpinner(false)
+               
+                try {
+                
+                    setError(res.data.msg)
+                } catch (error) {
+                   
+                }
+            
 
         });  
 
@@ -113,10 +117,13 @@ export default function Login(){
 
             axios.post("https://server-4w73.onrender.com/login", item)
                 .then((res) => {
-                    localStorage.setItem("token", JSON.stringify(res.data.token));
-                    localStorage.setItem("id", JSON.stringify(res.data.id));
-                    localStorage.setItem("costumer", JSON.stringify(res.data.nome));
-                   navigate('/pedido')
+                  
+                       
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+                        localStorage.setItem("id", JSON.stringify(res.data.id));
+                        localStorage.setItem("costumer", JSON.stringify(res.data.nome));
+                       navigate('/pedido')
+                    
                 })
                 .catch((error) => {
                     if (error.response) {

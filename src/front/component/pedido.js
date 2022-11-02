@@ -9,10 +9,10 @@ import { FaUserCircle, FaCaretDown, FaAngleRight, FaAngleDown } from "react-icon
 import {useNavigate} from 'react-router-dom';
 import Cart from "./cart";
 import "./style/order.css"
-
+import { Oval } from 'react-loader-spinner'
 
 export default function Pedido(){
-
+  const [spinner, setSpinner] = useState(true)
   const navigate = useNavigate();
 
   var idString= localStorage.getItem("id")
@@ -82,6 +82,9 @@ useEffect(()=>{
   
 
     axios.post("https://server-4w73.onrender.com/costumer",data).then((response) => {
+      if (response.status == 200) {
+        setSpinner(false)
+       
         try {
           setItem(response.data.user);
           setItem2(response.data.user.endereco[0]);
@@ -89,6 +92,7 @@ useEffect(()=>{
         } catch (error) {
           navigate('/login')
         }
+      }
         
       });
     
@@ -103,12 +107,16 @@ useEffect(()=>{
   const orders = () => {
   
     axios.get("https://server-4w73.onrender.com/costumer/order/" + id).then((response) => {
-      try {
-        setorder(response.data.order);
-         console.log(response.data.order)
+      if (response.status == 200) {
+        setSpinner(false)
        
-      } catch (error) {
-        
+        try {
+          setorder(response.data.order);
+           console.log(response.data.order)
+         
+        } catch (error) {
+          
+        }
       }
     });
 
@@ -137,7 +145,18 @@ useEffect(()=>{
  
 
     return(
-
+<>
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
        <>
         
 
@@ -293,6 +312,8 @@ useEffect(()=>{
         <Cart />
 <Footer/>
 
+       </>
+}
        </>
     )
 }

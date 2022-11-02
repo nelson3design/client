@@ -7,14 +7,50 @@ import Cart from "./cart"
 import Carrossel from "./carrossel"
 import { CartContext } from "../context/context"
 import { FaShoppingCart } from "react-icons/fa";
-
-
+import axios from "axios";
+import { Oval } from 'react-loader-spinner'
 
 export default function Start(){
     const { handleCart, carts } = useContext(CartContext)
 
+    const [spinner, setSpinner] = useState(true)
+
+    const url = "https://server-4w73.onrender.com/"
+
+    useEffect(() => {
+
+        listItem()
+
+    }, [])
+
+    const listItem = () => {
+        axios.get(`${url}`).then((response) => {
+            if (response.status == 200) {
+                setSpinner(false)
+            }
+
+        });
+       
+    }
+
+   
+
     return(
+       
+       
         <>
+            {
+                spinner ? <div className="spinner"><Oval
+                    ariaLabel="loading-indicator"
+                    height={100}
+                    width={100}
+                    strokeWidth={5}
+                    strokeWidthSecondary={1}
+                    color="red"
+                    secondaryColor="white"
+                /></div>
+            :
+            <>
          <Header/>
          <Slide/>
          <div className="cardContent">
@@ -34,6 +70,8 @@ export default function Start(){
                     </div>
                 </div>
             </div>
+            </>
+             }
         </>
     )
 }

@@ -5,7 +5,7 @@ import axios from "axios";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
+import { Oval } from 'react-loader-spinner'
 import "./style/slide.css";
 
 // import required modules
@@ -19,25 +19,43 @@ export default function Slide() {
   const url2 = "https://server-4w73.onrender.com/mobile"
   const url3 = "https://server-4w73.onrender.com/"
 
+  const [spinner, setSpinner] = useState(true)
+
   useEffect(() => {
-
-
+  
     listItem()
 
   }, [])
 
   const listItem = () => {
     axios.get(`${url}`).then((response) => {
-      setItem(response.data);
+      if (response.status == 200) {
+        setSpinner(false)
+        setItem(response.data);
+      }
 
     });
     axios.get(`${url2}`).then((response) => {
-      setItem2(response.data);
+      if (response.status == 200) {
+        setSpinner(false)
+        setItem2(response.data);
+      }
 
     });
   }
   return (
     <>
+      {
+        spinner ? <div className="spinner"><Oval
+          ariaLabel="loading-indicator"
+          height={100}
+          width={100}
+          strokeWidth={5}
+          strokeWidthSecondary={1}
+          color="red"
+          secondaryColor="white"
+        /></div>
+          :
       <Swiper
       
         loop={true}
@@ -70,7 +88,19 @@ export default function Slide() {
        
        
       </Swiper>
+      }
 
+      {
+        spinner ? <div className="spinner"><Oval
+          ariaLabel="loading-indicator"
+          height={100}
+          width={100}
+          strokeWidth={5}
+          strokeWidthSecondary={1}
+          color="red"
+          secondaryColor="white"
+        /></div>
+          :
 
       <Swiper
       
@@ -104,6 +134,7 @@ export default function Slide() {
 
        
       </Swiper>
+      }
     </>
   );
 }

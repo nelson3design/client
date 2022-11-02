@@ -7,10 +7,12 @@ import Footer from "./footer";
 import { CartContext } from "../context/context"
 import { FaShoppingCart } from "react-icons/fa";
 import Cart from "./cart";
+import { Oval } from 'react-loader-spinner'
+
 export default function Bebidas(){
 
   const { carts, handleAdd, handleCart } = useContext(CartContext)
-
+  const [spinner, setSpinner] = useState(true)
   
      const [item, setItem] = useState([])
      const url ="https://server-4w73.onrender.com/bebidas"
@@ -25,13 +27,29 @@ export default function Bebidas(){
 
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
+          
+          if (response.status == 200) {
+            setSpinner(false)
             setItem(response.data);
+          }
             
         });
       }
 
 
     return(
+      <>
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
         <>
            <HeaderCardapio/>
 
@@ -87,6 +105,8 @@ export default function Bebidas(){
             </div>
           </div>
         </div>
+        </>
+}
         </>
     )
 }

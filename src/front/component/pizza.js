@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import Footer from "./footer";
 import { CartContext } from "../context/context"
 import { FaShoppingCart } from "react-icons/fa";
-
+import { Oval } from 'react-loader-spinner'
 import Cart from "./cart";
 
 export default function Pizza(){
-
+  const [spinner, setSpinner] = useState(true)
   const { carts, handleAdd, handleCart } = useContext(CartContext)
 
      const [item, setItem] = useState([])
@@ -26,13 +26,29 @@ export default function Pizza(){
 
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
+            
+          if (response.status == 200) {
+            setSpinner(false)
             setItem(response.data);
+          }
             
         });
       }
 
 
     return(
+      <>
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
         <>
            <HeaderCardapio/>
 
@@ -89,5 +105,7 @@ export default function Pizza(){
           </div>
         </div>
         </>
+}
+       </>
     )
 }

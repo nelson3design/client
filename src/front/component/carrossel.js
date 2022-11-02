@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./style/carrossel.css";
-
+import { Oval } from 'react-loader-spinner'
 // import required modules
 
 import {CartContext} from "../context/context"
@@ -20,6 +20,7 @@ import { Navigation, Pagination, Mousewheel, Keyboard,Autoplay, FreeMode } from 
 export default function Carrossel() {
 
   const { carts, handleAdd, handleCart } = useContext(CartContext)
+  const [spinner, setSpinner] = useState(true)
 
   const [item, setItem] = useState([])
   const url ="https://server-4w73.onrender.com/destaque"
@@ -34,14 +35,29 @@ export default function Carrossel() {
 
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
-            setItem(response.data);
             
+          if (response.status == 200) {
+            setSpinner(false)
+            setItem(response.data);
+          }
+         
         });
       }
 
    
   return (
     <>
+      {
+        spinner ? <div className="spinner"><Oval
+          ariaLabel="loading-indicator"
+          height={100}
+          width={100}
+          strokeWidth={5}
+          strokeWidthSecondary={1}
+          color="red"
+          secondaryColor="white"
+        /></div>
+          :
       <Swiper
         
         // slidesPerView={4}
@@ -117,6 +133,7 @@ export default function Carrossel() {
               }
        
       </Swiper>
+  }
     </>
   );
 }

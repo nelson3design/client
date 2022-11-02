@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { CartContext } from "../context/context"
 import HeaderCardapio from "./headerCardapio"
-
+import { Oval } from 'react-loader-spinner'
 import "./style/compra.css"
 import Footer from './footer';
 import { MdDownloadDone } from 'react-icons/md';
 import Cart from "./cart";
 export default function Compra(){
-
+  const [spinner, setSpinner] = useState(true)
   const { carts, handleDelete, handleAdd, total } = useContext(CartContext)
  
   const navigate = useNavigate();
@@ -89,10 +89,14 @@ export default function Compra(){
   const handleSubmit2 = ((e) => {
     e.preventDefault()
     axios.post("https://server-4w73.onrender.com/register", userInfos).then((res) => {
-      try {
-        localStorage.setItem("emailCliente", JSON.stringify(userInfos.email));
-        window.location.reload(); 
-      } catch (error) {
+      if (res.status == 200) {
+        setSpinner(false)
+       
+        try {
+          localStorage.setItem("emailCliente", JSON.stringify(userInfos.email));
+          window.location.reload(); 
+        } catch (error) {
+        }
       }
     });
   })
@@ -116,6 +120,9 @@ export default function Compra(){
     e.preventDefault()
     let item = { email, password }
     axios.post("https://server-4w73.onrender.com/login", item).then((res) => {
+      if (res.status == 200) {
+        setSpinner(false)
+       
         try {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("id", JSON.stringify(res.data.id));
@@ -127,6 +134,7 @@ export default function Compra(){
         } catch (error) {
           
         }
+      }
 
       });
   }
@@ -226,8 +234,10 @@ const handleSubmit=((e)=>{
     e.preventDefault()
 
   axios.post("https://server-4w73.onrender.com/order", data).then((res) => {
+   
 
       if (res.status === 200) {
+        setSpinner(false)
         localStorage.removeItem("cart")
         navigate('/obrigado')
       }
