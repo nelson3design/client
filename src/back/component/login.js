@@ -4,12 +4,12 @@ import {useNavigate} from 'react-router-dom';
 
 import axios from 'axios';
 // import "./style/meusPedidos.css"
-
+import { Oval } from 'react-loader-spinner'
 export default function Login(){
 
-    
-    const [nome, setNome]=useState("")
-    const [password, setPassword]=useState("")
+    const [spinner, setSpinner] = useState(false)
+    const [nome, setNome]=useState("nelson")
+    const [password, setPassword]=useState("123456")
 
     const navigate = useNavigate();
 
@@ -27,17 +27,18 @@ export default function Login(){
     const [invalid, setInvalid] = useState('')
 
     function login(e) {
+        setSpinner(true)
         e.preventDefault()
         let item = { nome, password }
 
         if (item.nome === "") {
 
             setNameError('o usuário é obrigatorio!')
-
+            setSpinner(false)
         } else if (item.password === "") {
 
             setPasswordError('a Senha é obrigatorio!')
-
+            setSpinner(false)
         }
         else {
             setNameError('')
@@ -46,13 +47,18 @@ export default function Login(){
 
             axios.post("https://server-4w73.onrender.com/admin/login", item)
                 .then((res) => {
-                    localStorage.setItem("tokenAdmin", JSON.stringify(res.data.token));
-                    localStorage.setItem("idAdmin", JSON.stringify(res.data.id));
-                    navigate('/admin/dashboard')
+                    if (res.status == 200) {
+                        setSpinner(false)
+                       
+                        localStorage.setItem("tokenAdmin", JSON.stringify(res.data.token));
+                        localStorage.setItem("idAdmin", JSON.stringify(res.data.id));
+                        navigate('/admin/dashboard')
+                    }
                 })
                 .catch((error) => {
                     if (error.response) {
-                        console.log(error.response.data.msg);
+                        setSpinner(false)
+                     
                         setInvalid(error.response.data.msg)
                     }
                 });
@@ -63,6 +69,18 @@ export default function Login(){
 
 
     return(
+        <>
+        {
+            spinner?<div className = "spinner">< Oval
+            ariaLabel = "loading-indicator"
+    height = { 100}
+    width = { 100}
+    strokeWidth = { 5}
+    strokeWidthSecondary = { 1}
+    color = "green"
+    secondaryColor = "white"
+        /></div >
+            :null}
         <>
      
 
@@ -95,6 +113,8 @@ export default function Login(){
 
         
         
+        </>
+
         </>
     )
 }

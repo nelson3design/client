@@ -11,7 +11,7 @@ import Pedido from "./pedido";
 import { Oval } from 'react-loader-spinner'
 import "./style/login.css"
 export default function Login(){
-    const [spinner, setSpinner] = useState(true)
+    const [spinner, setSpinner] = useState(false)
     const navigate = useNavigate();
 
     const [logIn, setLogIn]= useState(true)
@@ -79,7 +79,7 @@ export default function Login(){
         e.preventDefault()
         axios.post("https://server-4w73.onrender.com/register", data).then((res) => {
             
-                setSpinner(false)
+                
                
                 try {
                 
@@ -98,16 +98,19 @@ export default function Login(){
     const [invalid, setInvalid] = useState('')
 
     function btnLogin(e){
+        setSpinner(true)
     e.preventDefault()
         let item = { email, password }
 
         if(item.email===""){
         
             setEmailError('o Email é obrigatorio!')
+            setSpinner(false)
            
         } else if (item.password === ""){
             
             setPasswordError('a Senha é obrigatorio!')
+            setSpinner(false)
           
         }
          else{
@@ -117,17 +120,19 @@ export default function Login(){
 
             axios.post("https://server-4w73.onrender.com/login", item)
                 .then((res) => {
-                  
+                    if (res.status == 200) {
+                        setSpinner(false)
+
                        
                         localStorage.setItem("token", JSON.stringify(res.data.token));
                         localStorage.setItem("id", JSON.stringify(res.data.id));
                         localStorage.setItem("costumer", JSON.stringify(res.data.nome));
                        navigate('/pedido')
-                    
+                    }
                 })
                 .catch((error) => {
                     if (error.response) {
-                        console.log(error.response.data.msg);
+                        setSpinner(false)
                         setInvalid(error.response.data.msg)
                     }
                 });
@@ -149,7 +154,20 @@ export default function Login(){
     <div className="linksLogin">
         
         {
-            logIn? 
+            logIn?
+            <>
+              {
+            spinner?<div className = "spinner">< Oval
+            ariaLabel = "loading-indicator"
+    height = { 100}
+    width = { 100}
+    strokeWidth = { 5}
+    strokeWidthSecondary = { 1}
+    color = "green"
+    secondaryColor = "white"
+        /></div >
+            :null}
+           
         
         <div className="formPedidos">
             <div className="titlePedido">Entrar com e-mail e senha</div>
@@ -173,6 +191,7 @@ export default function Login(){
             </form>
             <span className="login_info" onClick={handleLogin}>Não tem uma conta? Cadastre-se</span>
         </div>
+         </> 
         : null
         }
        {
