@@ -25,7 +25,7 @@ export default function HeaderPedido(){
       <>
         <header className="headerBack">
             <nav className="nav container">
-                <a className="logoBack" href="http://localhost:3000/admin/dashboard">menu</a>
+                <a className="logoBack" href="/admin/dashboard">menu</a>
                 <div className="iconMobile">
                   {hamb? <FaBars onClick={handleHamb} className="iconM"/> : null}
                  {times?  <FaTimes onClick={handleTimes} className="iconM"/> : null}
@@ -33,9 +33,9 @@ export default function HeaderPedido(){
 
                 <ul className="navlistBack navBackMobile">
                    
-                    <li><a href="http://localhost:3000/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-                    <li className="ative"><a href="http://localhost:3000/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
-              <li><a href="http://localhost:3000/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
+                    <li><a href="/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+                    <li className="ative"><a href="/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
+              <li><a href="/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
 
 
 
@@ -43,9 +43,9 @@ export default function HeaderPedido(){
             </nav>
             {times?
                 <ul className="mobileLinks">
-                  <li><a href="http://localhost:3000/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-                    <li className="ative"><a href="http://localhost:3000/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
-                   <li><a href="http://localhost:3000/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
+                  <li><a href="/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+                    <li className="ative"><a href="/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
+                   <li><a href="/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
 
                 </ul>
              : null}

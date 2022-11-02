@@ -26,7 +26,7 @@ function Header(){
       <>
         <header className="headerBack">
             <nav className="nav container">
-                <a className="logoBack" href="http://localhost:3000/admin/dashboard">menu</a>
+                <a className="logoBack" href="/admin/dashboard">menu</a>
                 <div className="iconMobile">
                   {hamb? <FaBars onClick={handleHamb} className="iconM"/> : null}
                  {times?  <FaTimes onClick={handleTimes} className="iconM"/> : null}
@@ -34,17 +34,17 @@ function Header(){
                  
                 <ul className="navlistBack navBackMobile">
                    
-                <li className="ative"><a href="http://localhost:3000/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-                <li><a href="http://localhost:3000/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
-                <li><a href="http://localhost:3000/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
+                <li className="ative"><a href="/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+                <li><a href="/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
+                <li><a href="/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
 
                 </ul>
             </nav>
             {times?
                 <ul className="mobileLinks">
-                  <li className="ative"><a href="http://localhost:3000/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-                  <li><a href="http://localhost:3000/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
-                  <li><a href="http://localhost:3000/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
+                  <li className="ative"><a href="/admin/dashboard"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+                  <li><a href="/admin/dashboard/andamento"><FaClipboardCheck/> <span>pedidos</span></a></li>
+                  <li><a href="/admin/dashboard/banner"><FaRegImages /> <span>banner</span></a></li>
                 </ul>
              : null}
 

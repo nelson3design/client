@@ -112,7 +112,7 @@ const url="http://localhost:4000/"
       
         <header>
             <nav className="nav container">
-                <a href="http://localhost:3000/" className="logo">menu</a>
+                <a href="/" className="logo">menu</a>
                 <div className="menuMobile">
 
                    <form className="formMobile" onSubmit={handleSearch2}>
@@ -144,9 +144,9 @@ const url="http://localhost:4000/"
                         </form>
                     </li>
 
-                    <li><a href="http://localhost:3000/"><MdStarOutline className="star"/> <span>destaques</span></a></li>
-                    <li><a href="http://localhost:3000/cardapio"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-              <li><a href="http://localhost:3000/login"><FaUserAlt /> <small className={user}>Entrar</small><small className={userName} id="username">{item2.nome}</small></a></li>
+                    <li><a href="/"><MdStarOutline className="star"/> <span>destaques</span></a></li>
+                    <li><a href="/cardapio"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+              <li><a href="/login"><FaUserAlt /> <small className={user}>Entrar</small><small className={userName} id="username">{item2.nome}</small></a></li>
               <li><a><div className="baseCart" onClick={handleCart}><FaShoppingCart /> <small className="cartCount">{carts.length}</small></div></a></li>
 
                     
@@ -156,9 +156,9 @@ const url="http://localhost:4000/"
 
             {times?
                 <ul className="mobileLinks">
-                  <li><a href="http://localhost:3000/"><MdStarOutline className="star"/> <span>destaques</span></a></li>
-                    <li><a href="http://localhost:3000/cardapio"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
-              <li><a href="http://localhost:3000/login"><FaUserAlt /> <small className={user}>Entrar</small><small className={userName} id="username">{item2.nome}</small></a></li>
+                  <li><a href="/"><MdStarOutline className="star"/> <span>destaques</span></a></li>
+                    <li><a href="/cardapio"><MdOutlineRestaurant/> <span>cardápio</span></a></li>
+              <li><a href="/login"><FaUserAlt /> <small className={user}>Entrar</small><small className={userName} id="username">{item2.nome}</small></a></li>
               <li><a><div className="baseCart" onClick={handleCart}><FaShoppingCart /> <small className="cartCount">{carts.length}</small></div></a></li>
                 </ul>
              : null}
