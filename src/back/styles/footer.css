@@ -1,0 +1,13 @@
+
+
+.footerBack2{
+  display: grid;
+  place-items: center;
+  height: 50px;
+  background-color: #14171F;
+  border-bottom:10px solid red;
+}
+
+.footerBack2 p{
+    color: white;
+}

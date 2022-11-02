@@ -1,0 +1,559 @@
+header {
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 5%, rgba(20,23,31,1) 5%, rgba(20,23,31,1) 57%, rgba(255,0,0,1) 57%, rgba(255,0,0,1) 88%);
+    width: 100%;
+    height: 75px;
+    display: grid;
+    place-items: center;
+
+}
+
+.showUser{
+    display: block!important;
+}
+.hideUser {
+    display: none!important;
+}
+#username{
+white-space: nowrap;
+width: 80px;
+overflow: hidden;
+text-overflow: ellipsis;
+       
+}
+
+.container {
+    width: 90%;
+}
+
+.nav {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+}
+
+.logo {
+    font-size: 30px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    padding: 0 40px;
+    height: 100%;
+    background-color: red;
+    text-decoration: none;
+}
+
+.navlist {
+
+    display: flex;
+
+    height: 100%;
+
+}
+
+.navlist li {
+
+    list-style: none;
+    font-size: 14px;
+    color: white;
+
+    height: 100%;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    gap: 10px;
+    cursor: pointer;
+    background-color: red;
+
+}
+
+.navlist li a {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    padding: 0 40px;
+}
+
+.navlist li:hover {
+    background-color: white;
+    color: red !important;
+}
+
+.navlist li:hover a {
+
+    color: red;
+}
+
+.navlist li:nth-child(1) {
+    border-right: none;
+    background-color: #14171F;
+    padding: 0 40px;
+}
+
+.navlist li:nth-child(3) {
+    border: none;
+}
+
+.navlist li:nth-child(2) {
+    color: red;
+
+}
+
+.ative {
+    background-color: white !important;
+    color: red;
+}
+
+.ative a {
+
+    color: red;
+}
+
+.ative:hover {
+    background-color: red !important;
+    color: white !important;
+}
+
+.ative:hover a {
+
+    color: white !important;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+
+.barra {
+    height: 30px;
+    border: none;
+    /* display: none; */
+    width: 200px;
+    transition: all 0.3s;
+}
+
+.hideBarra {
+    width: 0px;
+    border: none;
+    transition: all 0.3s;
+    outline: none;
+    padding: 0;
+    height: 30px;
+}
+
+.barra:focus {
+
+    outline: none;
+
+}
+
+.search {
+    padding: 0 10px;
+    border: 1px solid white;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.semBorder {
+    padding: 0 10px;
+
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 18px;
+}
+
+.iconSearch {
+    color: red;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.formContent {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    color: white;
+}
+
+
+.navlist li a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.formSearch {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 20;
+}
+
+.formSearchContent {
+    width: 60%;
+    background-color: #5F5F5F;
+    background-color: rgb(194, 194, 194);
+    padding: 0 10%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.formResponse {
+
+    padding: 5% 0;
+    margin: auto;
+
+}
+
+.active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(255, 0, 0);
+}
+
+.menuMobile {
+    display: none;
+}
+
+.iconMobile {
+    display: none;
+}
+.mobileLinks{
+    display: none;
+}
+
+
+.baseCart{
+    position:relative;
+}
+
+.cartCount {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #333;
+    width:15px;
+    height:15px;
+    text-align: center;
+    border-radius: 100%;
+}
+@media (max-width:1025px) {
+    header {
+        background: red !important;
+        width: 100%;
+        height: 75px;
+        display: grid;
+        place-items: center;
+
+    }
+
+    .container {
+        width: 95% !important;
+    }
+
+    .nav {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+
+    }
+
+    .logo {
+        font-size: 30px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 800;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-left: none;
+        border-right: none;
+        padding: 0 0px;
+        height: 100%;
+        background-color: red;
+        text-decoration: none;
+
+    }
+
+    .menuMobile {
+        display: block;
+    }
+
+    .iconMobile {
+        display: block;
+    }
+
+    .formMobile {
+        display: flex;
+        align-items: center;
+    }
+
+    .formMobile input {
+        height: 25px;
+        border: none;
+         border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    .formMobile span {
+        height: 25px;
+        color: white;
+       background-color: #14171F;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        cursor: pointer;
+    }
+.iconM{
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+    .navlist {
+
+        display: flex;
+
+        height: 100%;
+        display: none;
+    }
+
+        .mobileLinks {
+            display: block;
+            position: absolute;
+            top: 75px;
+            z-index: 30;
+            background-color: red;
+            width: 100%;
+            padding: 20px 0px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+  .mobileLinks li{
+  list-style: none;
+  width: 95%;
+ padding: 10px 0;
+  }
+  .mobileLinks li a {
+      text-decoration: none;
+      display: flex;
+        align-items: center;
+        justify-content: flex-start;
+       gap: 10px;
+     padding-left: 10px;
+       font-size: 15px;
+       text-transform: uppercase;
+  }
+
+    .navlist li {
+
+        list-style: none;
+        font-size: 14px;
+        color: white;
+
+        height: 100%;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        font-weight: 500;
+        gap: 10px;
+        cursor: pointer;
+        background-color: red;
+
+    }
+
+    .navlist li a {
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        height: 100%;
+        width: 100%;
+        padding: 0 40px;
+    }
+
+    .navlist li:hover {
+        background-color: white;
+        color: red !important;
+    }
+
+    .navlist li:hover a {
+
+        color: red;
+    }
+
+    .navlist li:nth-child(1) {
+        border-right: none;
+        background-color: #14171F;
+        padding: 0 40px;
+    }
+
+    .navlist li:nth-child(3) {
+        border: none;
+    }
+
+    .navlist li:nth-child(2) {
+        color: red;
+
+    }
+
+    .ative {
+        background-color: white !important;
+        color: red;
+    }
+
+    .ative a {
+
+        color: red;
+    }
+
+    .ative:hover {
+        background-color: red !important;
+        color: white !important;
+    }
+
+    .ative:hover a {
+
+        color: white !important;
+    }
+
+    .form {
+        display: flex;
+        align-items: center;
+    }
+
+    .barra {
+        height: 30px;
+        border: none;
+        /* display: none; */
+        width: 200px;
+        transition: all 0.3s;
+    }
+
+    .hideBarra {
+        width: 0px;
+        border: none;
+        transition: all 0.3s;
+        outline: none;
+        padding: 0;
+        height: 30px;
+    }
+
+    .barra:focus {
+
+        outline: none;
+
+    }
+
+    .search {
+        padding: 0 10px;
+        border: 1px solid white;
+        height: 28px;
+        display: flex;
+        align-items: center;
+    }
+
+    .semBorder {
+        padding: 0 10px;
+
+        height: 28px;
+        display: flex;
+        align-items: center;
+    }
+
+    .star {
+        font-size: 18px;
+    }
+
+    .iconSearch {
+        color: red;
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    .formContent {
+        display: flex;
+        align-items: center;
+    }
+
+    a {
+        color: white;
+    }
+
+
+    .navlist li a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .formSearch {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        z-index: 20;
+    }
+
+    .formSearchContent {
+        width: 100%;
+        background-color: #5F5F5F;
+        background-color: rgb(194, 194, 194);
+        padding: 0 10%;
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+    }
+
+    .formResponse {
+
+        padding: 5% 0;
+        margin: auto;
+
+    }
+
+    .active {
+        background-color: rgb(255, 255, 255);
+        color: rgb(255, 0, 0);
+    }
+}

@@ -1,0 +1,161 @@
+
+.sideContainerOn{
+    width: 100%;
+    background-color:rgba(76, 76, 77, 0.774);
+    height: 100vh;
+    z-index: 199;
+    position: fixed;
+    top: 0;
+}
+.sideContainerOff{
+width: 0vw;
+overflow: hidden;
+}
+
+.name{
+    color: white;
+}
+
+.side {
+    background-color: #5F5F5F;
+    width: 15%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px !important;
+    overflow: scroll;
+    transition: all 0.3s;
+    z-index: 200;
+}
+
+.side .img {
+    width: 100%;
+}
+
+.sideItem {
+    width: 100%;
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 10px;
+    gap: 10px;
+}
+
+
+
+
+.cart {
+    position: relative;
+    font-size: 20px;
+}
+
+.cartItem {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 100%;
+
+}
+
+#on {
+    width: 15%;
+
+}
+
+#off {
+    width: 0px;
+    overflow: hidden;
+    padding: 0px !important;
+    transition: all 0.3s;
+}
+
+.close {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    position: fixed;
+    top: 1%;
+    left: 78%;
+     z-index: 200;
+     background:red;
+     padding:10px;
+     border-radius: 100%;
+     width: 20px;
+     height: 20px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.cartB {
+
+    cursor: pointer;
+}
+
+.finalizarComprar{
+    padding:10px 30px;
+    background-color:red;
+    color:white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+   
+}
+
+.cartPrecoTotal{
+    width: 100%;
+    display:grid;
+    place-items: center;
+    margin: 50px 0;
+    gap: 40px
+}
+
+@media (max-width:1025px) {
+    .sideContainerOn {
+            width: 100%;
+            background-color: rgba(76, 76, 77, 0.774);
+            height: 100vh;
+            z-index: 199;
+            position: fixed;
+            top: 0;
+        }
+    
+  
+        .side {
+            background-color: #5F5F5F;
+            width: 60%;
+        margin: 0 20px;
+        }
+.cartItem {
+        width: 50px;
+        height: 15px;
+       
+
+    }
+
+    #on {
+        width: 50%;
+
+    }
+
+        .close {
+          
+            left: 15%;
+          
+        }
+}
+
+.titleCompra{
+    text-align:center;
+}

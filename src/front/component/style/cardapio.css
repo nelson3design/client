@@ -1,0 +1,116 @@
+.linksBack {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    /* margin-top: 30px; */
+    background-color: #5F5F5F;
+}
+
+.linkContentBack {
+    width: 50%;
+    display: grid;
+    background-color: #5F5F5F;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+}
+
+.linkContentBack li {
+    list-style: none;
+    border: 1px solid white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.linkContentBack li:nth-child(2) {
+    border-left: none;
+}
+
+.linkContentBack li:nth-child(3) {
+    border-left: none;
+}
+
+.linkContentBack li:nth-child(3):hover {
+    border-left: 1px solid white;
+    /* border-right: none; */
+}
+
+.linkContentBack li:nth-child(2):hover {
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+}
+
+.linkContentBack li a {
+    width: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+
+}
+
+.ativo {
+    background-color: red;
+    border-left: 1px solid white!important;
+}
+
+.ativo:hover {
+    background-color: #5F5F5F !important;
+}
+
+.linkContentBack li:hover {
+    background-color: red;
+    color: white;
+}
+
+@media (max-width:1025px) {
+.linksBack {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        /* margin-top: 30px; */
+        background-color: #5F5F5F;
+    }
+
+    .linkContentBack {
+        width: 50%;
+        display: flex;
+       flex-direction: column;
+    }
+
+    .linkContentBack li {
+        list-style: none;
+        border: 1px solid white;
+        text-align: center;
+        padding: 10px 0;
+        width: 100%;
+        cursor: pointer;
+       
+    }
+
+    .linkContentBack li:nth-child(2) {
+        border-left: 1px solid white;
+    }
+
+    .linkContentBack li:nth-child(3) {
+        border-left: 1px solid white;
+    }
+
+    .linkContentBack li:nth-child(3):hover {
+        border-left: 1px solid white;
+        /* border-right: none; */
+    }
+
+    .linkContentBack li:nth-child(2):hover {
+        border-right: 1px solid white;
+        border-left: 1px solid white;
+    }
+
+    .linkContentBack li a {
+        width: 100%;
+        text-decoration: none;
+        font-size: 20px;
+        text-transform: uppercase;
+
+    }
+}

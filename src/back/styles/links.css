@@ -1,0 +1,124 @@
+
+.links{
+    width: 100%;
+   display: grid;
+   place-items: center;
+   margin-top: 30px;
+}
+.linkContent{
+    width: 50%;
+    display: grid;
+    background-color: #5F5F5F;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 0;
+}
+
+.linkContent li{
+   list-style: none;
+   border: 1px solid white;
+   text-align: center;
+   padding: 10px 0;
+   width: 100%;
+   cursor: pointer;
+}
+
+.linkContent li:nth-child(2){
+   border-left: none;
+ }
+ .linkContent li:nth-child(3){
+    border-left: none;
+  }
+
+  .linkContent li:nth-child(3):hover{
+    border-left: 1px solid white;
+    border-right: none;
+  }
+  .linkContent li:nth-child(2):hover{
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+  }
+
+.linkContent li a{
+   width: 100%;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+    
+ }
+ .ativo{
+    background-color: red;
+ }
+ .ativo:hover{
+    background-color: #5F5F5F!important;
+ }
+
+ .linkContent li:hover{
+   background-color: red;
+   color: white;
+ }
+
+ @media (max-width:1025px) {
+   .links {
+         width: 100%;
+         display: grid;
+         place-items: center;
+         margin-top: 30px;
+      }
+   
+      .linkContent {
+         width: 50%;
+         display: flex;
+         background-color: #5F5F5F;
+        flex-direction: column;
+         padding: 0;
+      }
+   
+      .linkContent li {
+         list-style: none;
+         border: 1px solid white;
+         text-align: center;
+         padding: 10px 0;
+         width: 100%;
+         cursor: pointer;
+      }
+   
+      .linkContent li:nth-child(2) {
+        
+         border-left: 1px solid white;
+      }
+   
+      .linkContent li:nth-child(3) {
+         border-left: 1px solid white;
+      }
+   
+      .linkContent li:nth-child(3):hover {
+         border-left: 1px solid white;
+         border-right: 1px solid white;
+      }
+   
+      .linkContent li:nth-child(2):hover {
+         border-right: 1px solid white;
+         border-left: 1px solid white;
+      }
+   
+      .linkContent li a {
+         width: 100%;
+         text-decoration: none;
+         font-size: 20px;
+         text-transform: uppercase;
+   
+      }
+   
+      .ativo {
+         background-color: red;
+      }
+   
+      .ativo:hover {
+         background-color: #5F5F5F !important;
+      }
+   
+      .linkContent li:hover {
+         background-color: red;
+         color: white;
+      }
+ }

@@ -1,0 +1,16 @@
+
+
+.login_info{
+    color:red;
+    float: right;
+    margin-top: 10px;
+}
+
+.login_info:hover{
+    opacity: .3;
+    cursor: pointer;
+}
+
+.error{
+    color: red;
+}

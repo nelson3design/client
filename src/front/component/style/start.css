@@ -1,0 +1,76 @@
+.cardContent {
+    background-color: #5F5F5F;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 0 100px 0;
+}
+
+.title {
+    font-size: 20px;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+@media (max-width:1025px) {
+.title {
+        
+        margin-left: 0px;
+        text-align: center;
+    }
+}
+
+.cartFloat{
+    position: fixed;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.baseCartFloat{
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+   cursor: pointer;
+}
+
+.base_cart{
+    position: relative;
+}
+
+.cart_float{
+    position: absolute;
+    left: 0px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+   display: grid;
+   place-items: center;
+   border-radius: 100%;
+}
+
+.count_float{
+   position: absolute;
+   left: -10px;
+   top: -10px;
+   display: grid;
+   place-items: center;
+}
+.cart_icon{
+    transform: scale(1.5);
+    fill: red;
+}
+
+.cartLength{
+    width: 24px;
+    height: 24px;
+    background-color: #333;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    color: white;
+}

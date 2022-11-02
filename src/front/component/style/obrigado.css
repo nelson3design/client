@@ -1,0 +1,56 @@
+
+
+.pageObrigado{
+    height: 65vh;
+}
+.modalObrigado{
+    margin: auto;
+    background-color: white;
+    width: 60%;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 10px;
+}
+
+.iconObrigado{
+    color: green;
+    font-size: 30px;
+    text-align: center;
+}
+
+.titleObrigado{
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    text-align: center;
+}
+
+.obrigado{
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.avisoObrigado{
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    text-align: center;
+    font-weight: 400;
+}
+
+@media (max-width:1025px) {
+    .baseItens {
+            margin: 50px 0 60px 0;
+            width: 95%;
+            
+        }
+
+                .modalObrigado {
+                    margin: auto;
+                    background-color: white;
+                    width: 80%;
+                  
+                }
+}

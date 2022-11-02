@@ -1,0 +1,194 @@
+
+
+.listas{
+    width: 100%;
+   display: flex;
+   justify-content: center;
+    background-color: #5F5F5F;
+    padding-bottom: 50px;
+    /* height: 100vh; */
+    padding-top: 50px;
+}
+
+.btnBarPes{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px 0 20px 0;
+}
+.btnBarPes a{
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 1px 20px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 30px;
+    font-size: 17px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+
+}
+
+
+.formPes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formPes .barText{
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    outline: none;
+    width: 212px;
+}
+
+.formPes .btnPes{
+  background-color: red;
+  color: white;
+  border: none;
+ height: 32px;
+ text-transform: uppercase;
+ border-top-right-radius: 3px;
+border-bottom-right-radius: 3px;
+cursor: pointer;
+margin-top: 1px;
+padding: 0 20px;
+}
+
+.table {
+    background-color: #14171f;
+   
+}
+
+.thead tr th{
+    
+    color: white;
+    font-size: 17px;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+.tbody{
+    background-color: white;
+}
+
+.tbody tr td{
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.nome,.desc, .cat{
+    text-align: start!important;
+}
+
+.action{
+    width: auto;
+    height: auto;
+    padding: 0;
+}
+
+.btnAtion{
+    background-color: #14171f;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    margin: 02px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+
+.paginationBase{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+   
+}
+
+.paginationBase button{
+   font-size: 20px;
+   border: none;
+   cursor: pointer;
+}
+.paginationBase button:hover{
+  opacity: 0.3;
+ }
+
+ @media (max-width:1025px) {
+    .btnBarPes {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin: 0px 0 20px 0;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .tbody tr td {
+        padding: 10px 20px;
+        text-align: end;
+    }
+
+
+    table{
+        border: none;
+       margin-bottom: 30px;
+    }
+    table tr th{
+        display:none;
+        
+    }
+    
+     td{
+        display:block;
+    }
+    
+    tbody{
+      height: auto;
+      overflow: hidden;
+    }
+    
+    table td{
+       text-align: right;
+      padding: 10px;
+      
+    }
+    
+    
+    
+    thead{
+    display: none;
+    }
+    
+    
+    
+    tbody{
+    
+    height: auto;
+    
+    
+    }
+    
+    
+    table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+         padding: 0 30px;
+         font-size: 18px;
+        font-weight: 700;
+    }
+    
+    
+ }

@@ -1,0 +1,181 @@
+.linksBackPedidos {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    /* margin-top: 30px; */
+    background-color: #5F5F5F;
+    height: auto;
+}
+
+.username{
+    color: rgb(255, 255, 255);
+    width: 100%;
+    margin-left: 20%;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+.formPedidos{
+    width: 50%;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.formPedidos form {
+    width: 100%;
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+
+}
+
+.formPedidos form .formItens {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+   gap: 10%;
+}
+
+.formPedidos form .formItens input {
+  height: 30px;
+ 
+}
+
+
+.select{
+    height: 35px;
+   
+}
+
+.formPedidos form .formItens div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  flex-direction: column;
+  margin: 15px 0;
+}
+ .formItens div label {
+    color: black;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.linksLogin {
+    width: 100%;
+    display: grid;
+    place-items: center;
+  
+    margin: 20px 0;
+    gap: 30px;
+}
+
+.btnPedido{
+    margin-top: 50px;
+    background-color: red;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.titlePedido{
+    color: black;
+    font-size: 25px;
+     text-transform: uppercase;
+     text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+.btnPedido:hover {
+   opacity: .3;
+}
+
+@media (max-width:1024px) {
+.linksBackPedidos {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        /* margin-top: 30px; */
+        background-color: #5F5F5F;
+        height: auto;
+        margin: 20px 0 50px 0;
+    }
+
+    .formPedidos {
+        width: 70%;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    .formPedidos form {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+    }
+
+    .formPedidos form .formItens {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .formPedidos form .formItens input {
+        height: 30px;
+        border-radius: 5px;
+    }
+
+    .formPedidos form .formItens div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .formItens div label {
+        color: black;
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .btnPedido {
+        margin-top: 50px;
+        background-color: red;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 17px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .titlePedido {
+        color: black;
+        font-size: 17px;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 600;
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+    }
+
+    .btnPedido:hover {
+        opacity: .3;
+    }
+        .username {
+            
+            margin-left: 2%;
+           
+        }
+}
