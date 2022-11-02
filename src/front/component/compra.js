@@ -88,7 +88,7 @@ export default function Compra(){
 
   const handleSubmit2 = ((e) => {
     e.preventDefault()
-    axios.post("http://localhost:4000/register", userInfos).then((res) => {
+    axios.post("https://server-4w73.onrender.com/register", userInfos).then((res) => {
       try {
         localStorage.setItem("emailCliente", JSON.stringify(userInfos.email));
         window.location.reload(); 
@@ -115,7 +115,7 @@ export default function Compra(){
   function btnLogin(e) {
     e.preventDefault()
     let item = { email, password }
-      axios.post("http://localhost:4000/login", item).then((res) => {
+    axios.post("https://server-4w73.onrender.com/login", item).then((res) => {
         try {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("id", JSON.stringify(res.data.id));
@@ -182,7 +182,7 @@ const itemAdicional =ad
 const [customer, setCustomer ] = useState("")
   
 const getId=(()=>{
-  axios.get("http://localhost:4000/email/" + emailCliente).then((res) => {
+  axios.get("https://server-4w73.onrender.com/email/" + emailCliente).then((res) => {
     try {
       localStorage.setItem("idCliente", JSON.stringify(res.data.user._id));
       setCustomer(res.data.user.nome)
@@ -225,7 +225,7 @@ var costumer = JSON.parse(costumerString)
 const handleSubmit=((e)=>{
     e.preventDefault()
 
-    axios.post("http://localhost:4000/order", data).then((res) => {
+  axios.post("https://server-4w73.onrender.com/order", data).then((res) => {
 
       if (res.status === 200) {
         localStorage.removeItem("cart")
@@ -242,7 +242,7 @@ const handleSubmit=((e)=>{
 
     const [item, setItem] = useState([])
     const url="http://localhost:5000/product/"
-    const url2="http://localhost:4000/"
+  const url2 ="https://server-4w73.onrender.com/"
 
 
      
@@ -265,7 +265,7 @@ const handleSubmit=((e)=>{
  
  
 
-      const url3="http://localhost:4000/bebidas"
+  const url3 ="https://server-4w73.onrender.com/bebidas"
      
   
         const listBebida=()=>{

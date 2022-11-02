@@ -32,7 +32,7 @@ function Create() {
     formdata.append('destaque', destaque);
 
 
-axios.post("http://localhost:4000/add-action", formdata,{   
+    axios.post("https://server-4w73.onrender.com/add-action", formdata,{   
         headers: { "Content-Type": "multipart/form-data" } 
 })
 .then(res => { 

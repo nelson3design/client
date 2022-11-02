@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 
 function Update() {
-    const url="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/"
    const navigate = useNavigate();
   const [upload, setUpload] = useState("")
   const [nome, setNome] = useState("")
@@ -31,7 +31,7 @@ function Update() {
 
 const loadName=()=>{
 
-    fetch("http://localhost:4000/edit/"+id)
+  fetch("https://server-4w73.onrender.com/edit/"+id)
     .then(response=> response.json())
     .then(res=>{
        
@@ -64,7 +64,7 @@ const loadName=()=>{
 
 
 
-axios.post("http://localhost:4000/edit-action", formdata,{   
+    axios.post("https://server-4w73.onrender.com/edit-action", formdata,{   
         headers: { "Content-Type": "multipart/form-data" } 
 })
 .then(res => { 

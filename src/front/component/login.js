@@ -77,7 +77,7 @@ export default function Login(){
 
     const handleSubmit = ((e) => {
         e.preventDefault()
-        axios.post("http://localhost:4000/register", data).then((res) => {
+        axios.post("https://server-4w73.onrender.com/register", data).then((res) => {
            try {
            
                setError(res.data.msg)
@@ -111,7 +111,7 @@ export default function Login(){
             setPasswordError('')
 
 
-            axios.post("http://localhost:4000/login", item)
+            axios.post("https://server-4w73.onrender.com/login", item)
                 .then((res) => {
                     localStorage.setItem("token", JSON.stringify(res.data.token));
                     localStorage.setItem("id", JSON.stringify(res.data.id));

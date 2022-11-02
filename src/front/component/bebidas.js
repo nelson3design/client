@@ -13,8 +13,8 @@ export default function Bebidas(){
 
   
      const [item, setItem] = useState([])
-    const url="http://localhost:4000/bebidas"
-    const url2="http://localhost:4000/"
+     const url ="https://server-4w73.onrender.com/bebidas"
+     const url2 ="https://server-4w73.onrender.com/"
 
      useEffect(()=>{
   

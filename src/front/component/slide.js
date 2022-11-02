@@ -15,9 +15,9 @@ export default function Slide() {
 
   const [item, setItem] = useState([])
   const [item2, setItem2] = useState([])
-  const url = "http://localhost:4000/desktop"
-  const url2 = "http://localhost:4000/mobile"
-  const url3 = "http://localhost:4000/"
+  const url = "https://server-4w73.onrender.com/desktop"
+  const url2 = "https://server-4w73.onrender.com/mobile"
+  const url3 = "https://server-4w73.onrender.com/"
 
   useEffect(() => {
 

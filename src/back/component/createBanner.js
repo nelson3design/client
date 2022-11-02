@@ -22,7 +22,7 @@ function CreateBanner() {
         formdata.append('upload', upload);
         formdata.append('tipo', tipo);
        
-        axios.post("http://localhost:4000/add-banner", formdata, {
+        axios.post("https://server-4w73.onrender.com/add-banner", formdata, {
             headers: { "Content-Type": "multipart/form-data" }
         })
             .then(res => {

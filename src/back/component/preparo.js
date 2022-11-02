@@ -12,8 +12,8 @@ export default function Preparo() {
   const navigate = useNavigate();
 
   const [order, setIOrder] = useState([])
-  const url = "http://localhost:4000/active"
-  const url2 = "http://localhost:4000/"
+  const url = "https://server-4w73.onrender.com/active"
+  const url2 = "https://server-4w73.onrender.com/"
 
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
@@ -28,7 +28,7 @@ export default function Preparo() {
 
 
   const listItem = () => {
-    axios.get("http://localhost:4000/order/preparado").then((response) => {
+    axios.get("https://server-4w73.onrender.com/order/preparado").then((response) => {
       setIOrder(response.data);
       console.log(response.data)
 

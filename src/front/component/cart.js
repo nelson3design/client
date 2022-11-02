@@ -7,7 +7,7 @@ import { CartContext } from "../context/context"
 export default function Cart(props) {
 
     const { carts, total, handleRemove, show, handleClose, showCart, handleAdd, handleDelete,showBase } = useContext(CartContext)
-    const url2 = "http://localhost:4000/"
+    const url2 = "https://server-4w73.onrender.com/"
 
 
     const listCart = new Map()

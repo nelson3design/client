@@ -22,8 +22,8 @@ export default function Carrossel() {
   const { carts, handleAdd, handleCart } = useContext(CartContext)
 
   const [item, setItem] = useState([])
-    const url="http://localhost:4000/destaque"
-    const url2="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/destaque"
+  const url2 ="https://server-4w73.onrender.com/"
 
     useEffect(()=>{
   

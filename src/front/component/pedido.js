@@ -60,8 +60,8 @@ const handlelogout =()=>{
 const [item, setItem] = useState([])
 const [item2, setItem2] = useState("")
 
-const url="http://localhost:4000/costumer"
-const url2="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/costumer"
+  const url2 ="https://server-4w73.onrender.com/"
   const ref = useRef(null);
 
 useEffect(()=>{
@@ -81,7 +81,7 @@ useEffect(()=>{
   const listItem=()=>{
   
 
-    axios.post("http://localhost:4000/costumer",data).then((response) => {
+    axios.post("https://server-4w73.onrender.com/costumer",data).then((response) => {
         try {
           setItem(response.data.user);
           setItem2(response.data.user.endereco[0]);
@@ -102,7 +102,7 @@ useEffect(()=>{
 
   const orders = () => {
   
-    axios.get("http://localhost:4000/costumer/order/" + id).then((response) => {
+    axios.get("https://server-4w73.onrender.com/costumer/order/" + id).then((response) => {
       try {
         setorder(response.data.order);
          console.log(response.data.order)

@@ -15,8 +15,8 @@ export default function Cardapio(){
 
 
      const [item, setItem] = useState([])
-    const url="http://localhost:4000/hamburguer"
-    const url2="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/hamburguer"
+  const url2 ="https://server-4w73.onrender.com/"
 
      useEffect(()=>{
   

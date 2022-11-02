@@ -17,7 +17,7 @@ function List(){
     const [value, setValue] = useState([])
      const [user, setUser] = useState([])
 
-    const url="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/"
  
 
     var idstring= localStorage.getItem("idAdmin")
@@ -47,7 +47,7 @@ function List(){
       },[])
 
       const userAdmin=()=>{
-        axios.post("http://localhost:4000/admin/user", idUser).then((res) => {
+        axios.post("https://server-4w73.onrender.com/admin/user", idUser).then((res) => {
             setUser(res.data.user);
             console.log(res.data)
             
@@ -55,7 +55,7 @@ function List(){
       }
 
       const listItem = () => {
-        axios.get("http://localhost:4000/").then((res) => {
+        axios.get("https://server-4w73.onrender.com/").then((res) => {
           setItem(res.data);
           console.log(res.data)
 
@@ -66,7 +66,7 @@ function List(){
 const handleSearch= async (e)=>{
   e.preventDefault()
     return await axios 
-    .get(`http://localhost:4000/item/${value}`)
+      .get(`https://server-4w73.onrender.com/item/${value}`)
     .then((response)=>{
       console.log(response.data)
     setItem(response.data)
@@ -83,7 +83,7 @@ const handleSearch= async (e)=>{
 const handleRemove=(id)=>{
   console.log(id)
 if(window.confirm('tem certeza de excluir esse usuáorio')){
-  axios.get("http://localhost:4000/delete/"+id).then((response) => {
+  axios.get("https://server-4w73.onrender.com/delete/"+id).then((response) => {
         
         listItem()
         

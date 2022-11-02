@@ -15,8 +15,8 @@ function Header(){
   var idString = localStorage.getItem("id")
 
   var id = JSON.parse(idString)
-  const url3 = "http://localhost:4000/costumer"
-  const url4 = "http://localhost:4000/"
+  const url3 = "https://server-4w73.onrender.com/costumer"
+  const url4 = "https://server-4w73.onrender.com/"
 
 
   var user=""
@@ -45,7 +45,7 @@ function Header(){
 
   const listItem = () => {
 
-    axios.post("http://localhost:4000/costumer",data).then((response) => {
+    axios.post("https://server-4w73.onrender.com/costumer",data).then((response) => {
       try {
 
         setItem2(response.data.user);
@@ -63,7 +63,7 @@ function Header(){
 
 
 
-const url="http://localhost:4000/"
+  const url ="https://server-4w73.onrender.com/"
     const [showBarra, setShowBarra] = useState(false)
 
     const [hamb, setHamb] = useState(true)
@@ -94,7 +94,7 @@ const url="http://localhost:4000/"
        const handleSearch2= async (e)=>{
         e.preventDefault()
          return await axios 
-         .get(`http://localhost:4000/item/${value}`)
+           .get(`https://server-4w73.onrender.com/item/${value}`)
          .then((response)=>{
          
       

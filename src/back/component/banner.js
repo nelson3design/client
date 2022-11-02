@@ -12,7 +12,7 @@ function Banner() {
     const [item, setItem] = useState([])
     const [image, setImage] = useState("")
     const [modal ,setModal]=useState(false)
-    const url = "http://localhost:4000/"
+    const url = "https://server-4w73.onrender.com/"
 
 
     useEffect(() => {
@@ -35,7 +35,7 @@ function Banner() {
    
 
     const listItem = () => {
-        axios.get("http://localhost:4000/banners").then((res) => {
+        axios.get("https://server-4w73.onrender.com/banners").then((res) => {
             setItem(res.data);
 
         });
@@ -48,7 +48,7 @@ function Banner() {
     const handleRemove = (id) => {
         console.log(id)
         if (window.confirm('tem certeza de excluir esse usuáorio')) {
-            axios.get("http://localhost:4000/delete/banner/" + id).then((response) => {
+            axios.get("https://server-4w73.onrender.com/delete/banner/" + id).then((response) => {
 
                 listItem()
 
@@ -58,7 +58,7 @@ function Banner() {
 
     function handleImage(id){
       console.log(id)
-        axios.get("http://localhost:4000/banner/" + id).then((response) => {
+        axios.get("https://server-4w73.onrender.com/banner/" + id).then((response) => {
 
            setModal(true)
            setImage(response.data)

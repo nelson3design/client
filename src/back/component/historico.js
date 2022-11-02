@@ -13,7 +13,7 @@ export default function Historico() {
 
   const [order, setIOrder] = useState([])
   const [orderCancel, setIOrderCancel] = useState([])
-  const url2 = "http://localhost:4000/"
+  const url2 = "https://server-4w73.onrender.com/"
 
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
@@ -28,13 +28,13 @@ export default function Historico() {
 
 
   const listItem = () => {
-    axios.get("http://localhost:4000/order/finalizado").then((response) => {
+    axios.get("https://server-4w73.onrender.com/order/finalizado").then((response) => {
       setIOrder(response.data);
    
 
     });
 
-    axios.get("http://localhost:4000/order/cancelado").then((response) => {
+    axios.get("https://server-4w73.onrender.com/order/cancelado").then((response) => {
       setIOrderCancel(response.data);
     
 
