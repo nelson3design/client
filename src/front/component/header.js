@@ -192,7 +192,7 @@ function Header(){
                 <div className="cardPreco">
                     <div className="preco">R$ {dados.preco}</div>
                    
-                    <div className="btn"><span>comprar</span></div>
+                    <div className="btn" onClick={(e) => handleAdd(dados)}><span>comprar</span></div>
                 </div>
                 
             </div>
