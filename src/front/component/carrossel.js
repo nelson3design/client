@@ -47,17 +47,7 @@ export default function Carrossel() {
    
   return (
     <>
-      {
-        spinner ? <div className="spinner"><Oval
-          ariaLabel="loading-indicator"
-          height={100}
-          width={100}
-          strokeWidth={5}
-          strokeWidthSecondary={1}
-          color="red"
-          secondaryColor="white"
-        /></div>
-          :
+      
       <Swiper
         
         // slidesPerView={4}
@@ -130,7 +120,7 @@ export default function Carrossel() {
                 {/* </Link> */}
         </SwiperSlide>
             ))
-              }
+              
        
       </Swiper>
   }
