@@ -59,7 +59,7 @@ function Header(){
 
   }
 
-  const { handleCart, carts } = useContext(CartContext)
+  const { handleCart,handleAdd, carts } = useContext(CartContext)
 
 
 
