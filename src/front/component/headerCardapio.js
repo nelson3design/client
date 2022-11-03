@@ -58,7 +58,7 @@ function HeaderCardapio(){
 
   }
 
-  const { handleCart, carts } = useContext(CartContext)
+  const { handleCart,handleAdd, carts } = useContext(CartContext)
 
 
   const url ="https://server-4w73.onrender.com/"
