@@ -178,7 +178,7 @@ function Header(){
               item && item.map((dados)=>(
                 <div className="formResponse">
                
-                      <Link to={`/comprar/${dados.id}`} style={{textDecoration: "none"}} className="linkHover">
+                      
               <div className="cardBase">
             <div className="cardImg">
                 <img src={url+dados.file} alt={url+dados.file}/>
@@ -198,7 +198,7 @@ function Header(){
             </div>
 
         </div>
-                </Link>
+                
        </div>
             ))
               }
