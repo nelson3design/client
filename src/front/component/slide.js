@@ -45,17 +45,7 @@ export default function Slide() {
   }
   return (
     <>
-      {
-        spinner ? <div className="spinner"><Oval
-          ariaLabel="loading-indicator"
-          height={100}
-          width={100}
-          strokeWidth={5}
-          strokeWidthSecondary={1}
-          color="red"
-          secondaryColor="white"
-        /></div>
-          :
+      
       <Swiper
       
         loop={true}
@@ -88,19 +78,9 @@ export default function Slide() {
        
        
       </Swiper>
-      }
+      
 
-      {
-        spinner ? <div className="spinner"><Oval
-          ariaLabel="loading-indicator"
-          height={100}
-          width={100}
-          strokeWidth={5}
-          strokeWidthSecondary={1}
-          color="red"
-          secondaryColor="white"
-        /></div>
-          :
+     
 
       <Swiper
       
@@ -134,7 +114,7 @@ export default function Slide() {
 
        
       </Swiper>
-      }
+      
     </>
   );
 }
