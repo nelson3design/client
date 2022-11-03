@@ -170,7 +170,7 @@ function HeaderPedido(){
               item && item.map((dados)=>(
                 <div className="formResponse">
                
-                      <Link to={`/comprar/${dados.id}`} style={{textDecoration: "none"}} className="linkHover">
+                      
               <div className="cardBase">
             <div className="cardImg">
                 <img src={url+dados.file} alt={url+dados.file}/>
@@ -184,13 +184,13 @@ function HeaderPedido(){
                 <div className="cardPreco">
                     <div className="preco">R$ {dados.preco}</div>
                    
-                    <div className="btn"><span>comprar</span></div>
+                    <div className="btn" onClick={(e) => handleAdd(dados)} ><span>comprar</span></div>
                 </div>
                 
             </div>
 
         </div>
-                </Link>
+                
        </div>
             ))
               }
