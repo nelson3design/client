@@ -58,7 +58,7 @@ function HeaderPedido(){
 
   }
 
-  const { handleCart, carts } = useContext(CartContext)
+  const { handleCart,handleAdd, carts } = useContext(CartContext)
 
   const url ="https://server-4w73.onrender.com/"
     const [showBarra, setShowBarra] = useState(false)
