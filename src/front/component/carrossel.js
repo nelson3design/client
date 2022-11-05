@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./style/card.css"
+import { FaSearchPlus } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
@@ -17,12 +18,18 @@ import {CartContext} from "../context/context"
 
 import { Navigation, Pagination, Mousewheel, Keyboard,Autoplay, FreeMode } from "swiper";
 
+
+
 export default function Carrossel() {
 
-  const { carts, handleAdd, handleCart } = useContext(CartContext)
+  const { showProduct, setShowProduct,carts, sowCarrinho, handleAdd, handleCart } = useContext(CartContext)
   const [spinner, setSpinner] = useState(true)
 
   const [item, setItem] = useState([])
+  const [view, setView] = useState("")
+
+ 
+
   const url ="https://server-4w73.onrender.com/destaque"
   const url2 ="https://server-4w73.onrender.com/"
 
@@ -38,15 +45,52 @@ export default function Carrossel() {
             
           if (response.status == 200) {
             setSpinner(false)
-            setItem(response.data);
+            // setItem(response.data);
+
+            const arr = response.data
+            var data = arr.map(obj => ({ ...obj, event: 0 }))
+            setItem(data);
           }
          
         });
+       
       }
 
+  function handleViewProduct(){
+    setShowProduct(false)
+  }
+
+  function handleView(dados){
+    
+    setShowProduct(true)
+     setView(dados)
+  }
+
+console.log(view)
    
   return (
     <>
+    {
+      showProduct?
+          <div className="view_product_base">
+            <div className="close_modal" onClick={handleViewProduct}>&ensp;</div>
+            <div className="view">
+              <div className="view_img"><img src={url2 + view.file} alt={url2 + view.file} /></div>
+              <div className="view_info">
+                <div className="title_view">{view.nome}</div>
+                <div className="description_view">{view.description}</div>
+                <div className="cardPreco">
+                  <div className="preco">{view.event > 0 ? view.event + " x " : null} R$ {view.preco}</div>
+                  <div className="btn btn_view" onClick={(e) => handleAdd(view)}><span>comprar</span></div>
+                </div>
+                {
+                  view.event > 0 ? <div className="btnCart" onClick={handleCart}> ver carrinho</div> : null
+                }
+              </div>
+            </div>
+          </div>
+          :null
+    }
       
       <Swiper
         
@@ -60,7 +104,7 @@ export default function Carrossel() {
           clickable: true,
         }}
          autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
       breakpoints={{
@@ -90,7 +134,7 @@ export default function Carrossel() {
   }}
         
         navigation={false}
-         modules={[Navigation, Pagination, Mousewheel, Keyboard,Autoplay]}
+         modules={[Navigation, Mousewheel, Keyboard,Autoplay]}
         className="mySwiper"
 
         
@@ -103,18 +147,23 @@ export default function Carrossel() {
                 <SwiperSlide>
                       {/* <Link to={`/comprar/${dados.id}`} style={{textDecoration: "none"}} className="linkHover"> */}
             <div className="cardBase">
-                <div className="cardImg">
+                <div className="cardImg" onClick={()=>handleView(dados)}>
+                      <div className="view_product"> <FaSearchPlus /></div>
                     <img src={url2+dados.file} alt={url2+dados.file}/>
                     <h3>{dados.nome}</h3>
 
                 </div>
 
                 <div className="cardText">               
-                    <div className="texts">{dados.description.length < "30" ? dados.description: dados.description.slice(0,60)+"..." }</div>
+                    <div className="texts">{dados.description.length < "30" ? dados.description: dados.description.slice(0,30)+"..." }</div>
                     <div className="cardPreco">
-                      <div className="preco">R$ {dados.preco}</div>
+                        <div className="preco">{dados.event>0? dados.event+" x " :null} R$ {dados.preco}</div>
                       <div className="btn" onClick={(e) => handleAdd(dados)}><span>comprar</span></div>
-                    </div>               
+                    </div>
+                       {
+                        dados.event >0 ? <div className="btnCart" onClick={handleCart}> ver carrinho</div> :null
+                       }           
+                      
                 </div>
              </div>
                 {/* </Link> */}

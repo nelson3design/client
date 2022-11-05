@@ -7,7 +7,6 @@ import BackList from "./back/list";
 import BackCreate from "./back/create";
 import BackUpdate from "./back/update"
 
-import MeusPedidos from "./front/component/login";
 
 import Compra from "./front/component/compra";
 
@@ -26,11 +25,12 @@ import Bebidas from "./front/component/bebidas";
 import Obrigado from "./front/component/obrigado";
 import Pedido from "./front/component/pedido";
 
-import User from "./front/component/user";
 
-import Teste from "./front/component/teste";
+
 import Banner from "./back/component/banner"
 import CreateBanner from "./back/component/createBanner";
+import Comments from "./front/component/comments";
+
 function App() {
 
 
@@ -42,7 +42,7 @@ function App() {
       <Routes>
 
         {/* front-end */}
-          <Route exact path="/teste" element={<Teste />}></Route> 
+         
         <Route exact path="/" element={<Start/>}></Route> 
         <Route path="/cardapio" element={<Cardapio/>}></Route> 
          <Route path="/pizza" element={<Pizza/>}></Route> 
@@ -52,8 +52,9 @@ function App() {
 
          <Route path="/login" element={<Login/>}></Route> 
          <Route path="/pedido" element={<Pedido/>}></Route>
+          <Route path="/comment" element={<Comments />}></Route>
 
-          <Route path="/login/user" element={<User/>}></Route>
+
      
 
         {/* back-end */}

@@ -264,7 +264,7 @@ useEffect(()=>{
                 
             <div className="btns btn_order">                  
               {order.confirmar == "off" && order.cancelar == "off" ? <button className="cancelar" onClick={() => handleCancel(order)}>cancelar</button> :
-                <button className="cancelado" >cancelado</button>
+               null
               }
             </div>
         </div>

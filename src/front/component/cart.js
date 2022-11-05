@@ -43,7 +43,7 @@ export default function Cart(props) {
                                     <div className="sideItem" key={data.id}>
                                         <img className="img" src={url2 + data.file} />
                                         <div className="name">{data.nome}</div>
-                                        <div className="preco">{data.qty} x {data.preco}</div>
+                                        <div className="preco">{data.qty} x R$ {data.preco}</div>
                                         <div><button onClick={(e) => handleDelete(data)}>-</button> <button onClick={(e) => handleAdd(data)}>+</button></div>
                                         <button onClick={(e) => handleRemove(data._id)}>Remover item</button>
 

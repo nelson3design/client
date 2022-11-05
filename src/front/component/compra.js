@@ -330,7 +330,7 @@ const handleSubmit=((e)=>{
       setAd(filterItem)
     }
   }
-  console.log(ad)
+  
  
 
  

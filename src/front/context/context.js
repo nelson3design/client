@@ -13,7 +13,7 @@ export const CartContext = createContext({})
 export const CartProvider = ({ children }) => {
 
     const [showCart, setShowCart] = useState(false)
-
+    const [showProduct, setShowProduct] = useState(false)
     var show
     var showBase
 
@@ -27,6 +27,7 @@ export const CartProvider = ({ children }) => {
 
     function handleCart() {
         setShowCart(true)
+        setShowProduct(false)
 
     }
     function handleClose() {
@@ -39,6 +40,8 @@ export const CartProvider = ({ children }) => {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
 
     const [carts, setCarts] = useState(cartFromLocalStorage)
+
+    const [sowCarrinho, setSowCarrinho] = useState(false)
 
 
 
@@ -76,7 +79,8 @@ export const CartProvider = ({ children }) => {
         } else {
             setCarts([...carts, { ...dados, qty: 1 }])
         }
-       
+      
+        dados.event++
 
     }
 
@@ -101,7 +105,7 @@ export const CartProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ carts, total, handleRemove, handleAdd, showCart, show, handleCart, handleClose, handleDelete, showBase }}>
+        <CartContext.Provider value={{ showProduct, setShowProduct, setSowCarrinho,carts, sowCarrinho, total, handleRemove, handleAdd, showCart, show, handleCart, handleClose, handleDelete, showBase }}>
             {children}
         </CartContext.Provider>
     )
