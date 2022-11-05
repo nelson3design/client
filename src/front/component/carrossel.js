@@ -121,9 +121,9 @@ export default function Carrossel() {
         </SwiperSlide>
             ))
               
-       
+       }
       </Swiper>
-  }
+  
     </>
   );
 }
