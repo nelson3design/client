@@ -76,19 +76,22 @@ export default function Login(){
 
 
     const handleSubmit = ((e) => {
+        setSpinner(true)
         e.preventDefault()
-        axios.post("https://server-4w73.onrender.com/register", data).then((res) => {
-            
-                
-               
-                try {
-                
-                    setError(res.data.msg)
-                } catch (error) {
-                   
-                }
-            
+        axios.post("https://server-4w73.onrender.com/register", data)
+        .then((res) => {
+           
+            if (res.status == 201) {
+                setSpinner(false)
+                navigate('/pedido')
+            }    
 
+        })
+        .catch((error)=>{
+            if (error.response) {
+                setSpinner(false)
+                setInvalid(error.response.data.msg)
+            }
         });  
 
     })
@@ -196,6 +199,19 @@ export default function Login(){
         }
        {
         logOut?
+        <>
+                   {
+            spinner?<div className = "spinner">< Oval
+            ariaLabel = "loading-indicator"
+    height = { 100}
+    width = { 100}
+    strokeWidth = { 5}
+    strokeWidthSecondary = { 1}
+    color = "green"
+    secondaryColor = "white"
+        /></div >
+            :null}
+       
        
         <div className="formPedidos">
             <div className="titlePedido">QUERO ME CADASTRAR</div>
@@ -304,6 +320,7 @@ export default function Login(){
                     
                     </div>
                 </div>
+                  <small className="error">{invalid}</small>
                 <div className="formItens">
                     <div>
                         <label>Crie sua Senha de acesso</label>
@@ -321,6 +338,7 @@ export default function Login(){
             </form>
             <span className="login_info" onClick={handleLogout}>Entrar com e-mail e senha</span>
         </div>
+            </>
         : null
         }
     </div>

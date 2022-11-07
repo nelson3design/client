@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/links.css"
 
 import "../styles/ativos.css"
-
+import { Oval } from 'react-loader-spinner'
 
 
 export default function Entrega() {
@@ -14,7 +14,10 @@ export default function Entrega() {
   const [order, setIOrder] = useState([])
 
   const url2 = "https://server-4w73.onrender.com/"
+  const [spinner, setSpinner] = useState(true)
 
+
+  
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
       //navigate('/admin/andamento')
@@ -29,8 +32,11 @@ export default function Entrega() {
 
   const listItem = () => {
     axios.get("https://server-4w73.onrender.com/order/entregado").then((response) => {
-      setIOrder(response.data);
-      console.log(response.data)
+   
+      if (response.status == 200) {
+        setIOrder(response.data);
+        setSpinner(false)
+      }
 
     });
   }
@@ -74,7 +80,17 @@ export default function Entrega() {
 
           </ul>
         </div>
-
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
 
         <section className="baseItens">
 
@@ -187,7 +203,7 @@ export default function Entrega() {
           </>
 
         </section>
-
+        }
       </div>
 
     </>

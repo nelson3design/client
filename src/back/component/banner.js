@@ -5,6 +5,8 @@ import "../styles/list.css"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import HeaderBanner from "./bannerHeader"
+import { Oval } from 'react-loader-spinner'
+
 
 function Banner() {
     const navigate = useNavigate();
@@ -13,7 +15,7 @@ function Banner() {
     const [image, setImage] = useState("")
     const [modal ,setModal]=useState(false)
     const url = "https://server-4w73.onrender.com/"
-
+    const [spinner, setSpinner] = useState(true)
 
     useEffect(() => {
         if (localStorage.getItem("idAdmin")) {
@@ -35,8 +37,12 @@ function Banner() {
    
 
     const listItem = () => {
-        axios.get("https://server-4w73.onrender.com/banners").then((res) => {
-            setItem(res.data);
+        axios.get("https://server-4w73.onrender.com/banners").then((response) => {
+           
+            if (response.status == 200) {
+                setItem(response.data);
+                setSpinner(false)
+            }
 
         });
     }
@@ -47,10 +53,14 @@ function Banner() {
 
     const handleRemove = (id) => {
         console.log(id)
-        if (window.confirm('tem certeza de excluir esse usuáorio')) {
+        if (window.confirm('tem certeza de excluir esse banner')) {
+            setSpinner(true)
             axios.get("https://server-4w73.onrender.com/delete/banner/" + id).then((response) => {
 
-                listItem()
+                if (response.status == 200) {
+                    setSpinner(false)
+                    listItem()
+                }
 
             });
         }
@@ -91,67 +101,79 @@ function Banner() {
             <HeaderBanner />
 
             {
-               modal?
-                <div className="modal_base">
-                    <div className="modal_close" onClick={handleClose}>x</div>
-                    <div className="modal_image"><img src={url + image.file} alt="" /></div>
-                </div>
-             : 
-          
-            <div className="listas">
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
 
-                <div className="listasContent container">
+            <>
+                        {
+                            modal ?
+                                <div className="modal_base">
+                                    <div className="modal_close" onClick={handleClose}>x</div>
+                                    <div className="modal_image"><img src={url + image.file} alt="" /></div>
+                                </div>
+                                :
 
+                                <div className="listas">
 
-                    <div className="btnBarPes">
-                        <Link to="/admin/dashboard/create/banner" className="btnAdd">Adicionar banner</Link>
-
-                    </div>
-
-
-                    <table border="0px" width="100%" className="table">
-                        <thead className="thead">
-                            <tr>
-                                <th>Imagem</th>
-                                <th>Tipo</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody className="tbody">
+                                    <div className="listasContent container">
 
 
-                            {
+                                        <div className="btnBarPes">
+                                            <Link to="/admin/dashboard/create/banner" className="btnAdd">Adicionar banner</Link>
 
-                                currentItens && currentItens.map((dados) => (
-
-                                    <tr key={dados.id}>
-                                        <td data-label="Imagem"><img className="image_banner" onClick={() => handleImage(dados._id)} src={url + dados.file} width="60px" alt="" /></td>
-                                        <td className="Nome" data-label="Tipo">{dados.tipo}</td>
+                                        </div>
 
 
-                                        <td data-label="Ações" className="action">
+                                        <table border="0px" width="100%" className="table">
+                                            <thead className="thead">
+                                                <tr>
+                                                    <th>Imagem</th>
+                                                    <th>Tipo</th>
+                                                    <th>link</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="tbody">
 
 
-                                            <button onClick={() => handleRemove(dados._id)} className="btnAtion2 btnAtion">Excluir</button>
-                                        </td>
-                                    </tr>
-                                ))
+                                                {
+
+                                                    currentItens && currentItens.map((dados) => (
+
+                                                        <tr key={dados.id}>
+                                                            <td data-label="Imagem"><img className="image_banner" onClick={() => handleImage(dados._id)} src={url + dados.file} width="60px" alt="" /></td>
+                                                            <td className="Nome" data-label="Tipo">{dados.tipo}</td>
+                                                            <td className="Nome" data-label="Link">{dados.link}</td>
+                                                            <td data-label="Ações" className="action">
+                                                                <button onClick={() => handleRemove(dados._id)} className="btnAtion2 btnAtion">Excluir</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))
 
 
-                            }
-                        </tbody>
+                                                }
+                                            </tbody>
 
-                    </table>
+                                        </table>
 
-                    <div className="paginationBase">
-                        {Array.from(Array(pages), (itens, index) => {
-                            return <button style={index == currentPage ? { background: "red", color: "white" } : null} value={index} onClick={(e) => setCurrentPage(Number(e.target.value))}>{index + 1}</button>
-                        })}
-                    </div>
-                </div>
-            </div>
-              }
-           
+                                        <div className="paginationBase">
+                                            {Array.from(Array(pages), (itens, index) => {
+                                                return <button style={index == currentPage ? { background: "red", color: "white" } : null} value={index} onClick={(e) => setCurrentPage(Number(e.target.value))}>{index + 1}</button>
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+            </>
+            }
         </>
     )
 

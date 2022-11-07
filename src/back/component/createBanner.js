@@ -12,6 +12,7 @@ function CreateBanner() {
     const navigate = useNavigate();
     const [upload, setUpload] = useState("")
     const [tipo, setTipo] = useState("")
+    const [link, setLink] = useState("")
  
 
 
@@ -21,6 +22,7 @@ function CreateBanner() {
         const formdata = new FormData();
         formdata.append('upload', upload);
         formdata.append('tipo', tipo);
+        formdata.append('link', link);
        
         axios.post("https://server-4w73.onrender.com/add-banner", formdata, {
             headers: { "Content-Type": "multipart/form-data" }
@@ -62,7 +64,10 @@ function CreateBanner() {
                                 
 
                             </select>
-
+                            <div className='formCreateContent'>
+                                <label>link</label>
+                                <input className='uplaod' value={link} type="text" onChange={(e) => setLink(e.target.value)} />
+                            </div>
                             <div className='formCreateContent'>
                                 <label>Imagem</label>
                                 <input className='uplaod' type="file" name="upload" onChange={(e) => setUpload(e.target.files[0])} />

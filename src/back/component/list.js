@@ -6,7 +6,7 @@ import "../styles/list.css"
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom';
 import { FaUserCircle,FaCaretDown } from "react-icons/fa";
-
+import { Oval } from 'react-loader-spinner'
 
 
 
@@ -18,7 +18,8 @@ function List(){
      const [user, setUser] = useState([])
 
   const url ="https://server-4w73.onrender.com/"
- 
+
+  const [spinner, setSpinner] = useState(true)
 
     var idstring= localStorage.getItem("idAdmin")
 
@@ -39,28 +40,27 @@ function List(){
     id: idAdmin
   }
 
-    useEffect(()=>{
+useEffect(()=>{
 
-        listItem()
-      userAdmin()
-         
-      },[])
+   listItem()
+  userAdmin()
+      
+  },[])
 
-      const userAdmin=()=>{
-        axios.post("https://server-4w73.onrender.com/admin/user", idUser).then((res) => {
-            setUser(res.data.user);
-            console.log(res.data)
-            
-        });
-      }
+const userAdmin=()=>{
+  axios.post("https://server-4w73.onrender.com/admin/user", idUser).then((res) => {
+      setUser(res.data.user);   
+  });
+}
 
-      const listItem = () => {
-        axios.get("https://server-4w73.onrender.com/").then((res) => {
-          setItem(res.data);
-          console.log(res.data)
-
-        });
-      }
+const listItem = () => {
+  axios.get("https://server-4w73.onrender.com/").then((response) => {
+    if (response.status == 200){
+      setItem(response.data);
+      setSpinner(false)
+    }
+  });
+}
 
 
 const handleSearch= async (e)=>{
@@ -68,13 +68,8 @@ const handleSearch= async (e)=>{
     return await axios 
       .get(`https://server-4w73.onrender.com/item/${value}`)
     .then((response)=>{
-      console.log(response.data)
     setItem(response.data)
-
       setValue("")
-
-
-
     })
   
 }
@@ -139,15 +134,24 @@ const handlelogout =()=>{
     return(
       
         <>
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
+            <>
         <div className="listas">
 
         <div className="listasContent container">
 
         <div className="infoClienteMobile">
-     
-     
-            
-            
+      
               <div>
 
               <div className="profile profileUser">
@@ -164,9 +168,7 @@ const handlelogout =()=>{
             
 
                </div>
-     
-          
-            
+   
      </div>
 
         
@@ -232,6 +234,8 @@ const handlelogout =()=>{
         </div>
         </div>
         <Footer/>
+            </>
+          }
         </>
     )
 

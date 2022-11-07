@@ -6,7 +6,7 @@ import "../styles/links.css"
 
 import "../styles/ativos.css"
 
-
+import { Oval } from 'react-loader-spinner'
 
 export default function Preparo() {
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ export default function Preparo() {
   const [order, setIOrder] = useState([])
   const url = "https://server-4w73.onrender.com/active"
   const url2 = "https://server-4w73.onrender.com/"
+  const [spinner, setSpinner] = useState(true)
+
 
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
@@ -29,16 +31,15 @@ export default function Preparo() {
 
   const listItem = () => {
     axios.get("https://server-4w73.onrender.com/order/preparado").then((response) => {
-      setIOrder(response.data);
-      console.log(response.data)
+      if (response.status == 200) {
+        setIOrder(response.data);
+        setSpinner(false)
+      }
 
     });
   }
 
-  //   console.log(item[0].idPedido)
-
-
-
+ 
   const handlePreparar = (_id) => {
 var id ={
   id:_id
@@ -75,9 +76,19 @@ var id ={
           </ul>
         </div>
 
-
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
+           
         <section className="baseItens">
-
 
           <>
 
@@ -187,7 +198,7 @@ var id ={
           </>
 
         </section>
-
+        }
       </div>
 
     </>

@@ -29,7 +29,7 @@ export default function Carrossel() {
   const [view, setView] = useState("")
 
  
-
+  const [done, setDone] = useState([])
   const url ="https://server-4w73.onrender.com/destaque"
   const url2 ="https://server-4w73.onrender.com/"
 
@@ -37,8 +37,9 @@ export default function Carrossel() {
   
 
         listItem()
-         
       },[])
+
+     
 
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
@@ -55,6 +56,11 @@ export default function Carrossel() {
         });
        
       }
+      
+     
+     
+
+    
 
   function handleViewProduct(){
     setShowProduct(false)

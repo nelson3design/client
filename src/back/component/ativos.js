@@ -6,7 +6,7 @@ import "../styles/links.css"
 
 import "../styles/ativos.css"
 
-
+import { Oval } from 'react-loader-spinner'
 
 export default function Ativos(){
     const navigate = useNavigate();
@@ -15,6 +15,8 @@ export default function Ativos(){
 
   const url ="https://server-4w73.onrender.com/active"
   const url2 ="https://server-4w73.onrender.com/"
+  const [spinner, setSpinner] = useState(true)
+
 
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
@@ -29,8 +31,11 @@ export default function Ativos(){
 
   const listItem=()=>{
     axios.get("https://server-4w73.onrender.com/order/ativo").then((response) => {
-      setIOrder(response.data);
-      console.log(response.data[0].costumer)
+     
+      if (response.status == 200) {
+        setIOrder(response.data);
+        setSpinner(false)
+      }
      
         
     });
@@ -78,7 +83,17 @@ axios.post(url2+"cancelar/",id).then((response)=>{
          
         </ul>
       </div>
-       
+          {
+            spinner ? <div className="spinner"><Oval
+              ariaLabel="loading-indicator"
+              height={100}
+              width={100}
+              strokeWidth={5}
+              strokeWidthSecondary={1}
+              color="red"
+              secondaryColor="white"
+            /></div>
+              :
       
       <section className="baseItens">
 
@@ -190,7 +205,7 @@ axios.post(url2+"cancelar/",id).then((response)=>{
         </>
             
      </section> 
-
+       }
         </div>
       
         </>

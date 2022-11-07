@@ -6,7 +6,7 @@ import "../styles/links.css"
 
 import "../styles/ativos.css"
 
-
+import { Oval } from 'react-loader-spinner'
 
 export default function Historico() {
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ export default function Historico() {
   const [order, setIOrder] = useState([])
   const [orderCancel, setIOrderCancel] = useState([])
   const url2 = "https://server-4w73.onrender.com/"
+  const [spinner, setSpinner] = useState(true)
+
 
   useEffect(() => {
     if (localStorage.getItem("idAdmin")) {
@@ -29,13 +31,20 @@ export default function Historico() {
 
   const listItem = () => {
     axios.get("https://server-4w73.onrender.com/order/finalizado").then((response) => {
-      setIOrder(response.data);
+      if (response.status == 200) {
+        setIOrder(response.data);
+        setSpinner(false)
+      }
    
 
     });
 
     axios.get("https://server-4w73.onrender.com/order/cancelado").then((response) => {
-      setIOrderCancel(response.data);
+      
+      if (response.status == 200) {
+        setIOrderCancel(response.data);
+        setSpinner(false)
+      }
     
 
     });
@@ -59,7 +68,17 @@ export default function Historico() {
           </ul>
         </div>
 
-
+        {
+          spinner ? <div className="spinner"><Oval
+            ariaLabel="loading-indicator"
+            height={100}
+            width={100}
+            strokeWidth={5}
+            strokeWidthSecondary={1}
+            color="red"
+            secondaryColor="white"
+          /></div>
+            :
         <section className="baseItens">
 
 
@@ -280,7 +299,7 @@ export default function Historico() {
           </>
 
         </section>
-
+      }
       </div>
 
     </>

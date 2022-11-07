@@ -32,6 +32,7 @@ export default function Slide() {
       if (response.status == 200) {
         setSpinner(false)
         setItem(response.data);
+        console.log(response.data)
       }
 
     });
@@ -39,6 +40,7 @@ export default function Slide() {
       if (response.status == 200) {
         setSpinner(false)
         setItem2(response.data);
+       
       }
 
     });
@@ -68,8 +70,8 @@ export default function Slide() {
 
           item && item.map((dados) => (
             <SwiperSlide>
-
-              <img src={url3 + dados.file} alt={url3 + dados.file} />
+          
+              <a href={dados.link}><img src={url3 + dados.file} alt={url3 + dados.file} /></a>
 
             </SwiperSlide>
           ))
@@ -106,7 +108,7 @@ export default function Slide() {
           item2 && item2.map((dados) => (
             <SwiperSlide>
             
-              <img src={url3 + dados.file} alt={url3 + dados.file} />
+              <a href={dados.link}><img src={url3 + dados.file} alt={url3 + dados.file} /></a>
                  
             </SwiperSlide>
           ))

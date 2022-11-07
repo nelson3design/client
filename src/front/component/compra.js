@@ -10,7 +10,7 @@ import Footer from './footer';
 import { MdDownloadDone } from 'react-icons/md';
 import Cart from "./cart";
 export default function Compra(){
-  const [spinner, setSpinner] = useState(true)
+  const [spinner, setSpinner] = useState(false)
   const { carts, handleDelete, handleAdd, total } = useContext(CartContext)
  
   const navigate = useNavigate();
@@ -88,15 +88,21 @@ export default function Compra(){
 
   const handleSubmit2 = ((e) => {
     e.preventDefault()
-    axios.post("https://server-4w73.onrender.com/register", userInfos).then((res) => {
-      if (res.status == 200) {
+    setSpinner(true)
+    axios.post("https://server-4w73.onrender.com/register", userInfos)
+    .then((res) => {
+
+      if (res.status == 201) {
         setSpinner(false)
-       
-        try {
-          localStorage.setItem("emailCliente", JSON.stringify(userInfos.email));
-          window.location.reload(); 
-        } catch (error) {
-        }
+        localStorage.setItem("emailCliente", JSON.stringify(userInfos.email));
+        localStorage.setItem("costumer", JSON.stringify(userInfos.nome));
+        navigate('/comprar')
+      }
+    })
+    .catch((error)=>{
+      if (error.response) {
+        setSpinner(false)
+        setInvalid(error.response.data.msg)
       }
     });
   })
@@ -116,30 +122,48 @@ export default function Compra(){
   
    
 // customer login
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [invalid, setInvalid] = useState('')
+
   function btnLogin(e) {
+    setSpinner(true)
     e.preventDefault()
     let item = { email, password }
-    axios.post("https://server-4w73.onrender.com/login", item).then((res) => {
-      if (res.status == 200) {
-        setSpinner(false)
-       
-        try {
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          localStorage.setItem("id", JSON.stringify(res.data.id));
-          localStorage.setItem("emailCliente", JSON.stringify(item.email));
-          localStorage.setItem("costumer", JSON.stringify(res.data.nome));
-          window.location.reload();
-          console.log(res.data)
-         
-        } catch (error) {
-          
-        }
-      }
+    if (item.email === "") {
 
-      });
+      setEmailError('o Email é obrigatorio!')
+      setSpinner(false)
+
+    } else if (item.password === "") {
+
+      setPasswordError('a Senha é obrigatorio!')
+      setSpinner(false)
+
+    }else{
+
+      axios.post("https://server-4w73.onrender.com/login", item)
+        .then((res) => {
+          if (res.status == 200) {
+            setSpinner(false)
+
+            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem("id", JSON.stringify(res.data.id));
+            localStorage.setItem("emailCliente", JSON.stringify(item.email));
+            localStorage.setItem("costumer", JSON.stringify(res.data.nome));
+            navigate('/comprar')
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            setSpinner(false)
+            setInvalid(error.response.data.msg)
+          }
+        });
+    }
   }
 
-    
+
 
     //fim verificar login
  
@@ -232,13 +256,13 @@ var costumer = JSON.parse(costumerString)
 
 const handleSubmit=((e)=>{
     e.preventDefault()
-
+  setSpinner(true)
   axios.post("https://server-4w73.onrender.com/order", data).then((res) => {
    
 
       if (res.status === 200) {
         setSpinner(false)
-        localStorage.removeItem("cart")
+       // localStorage.removeItem("cart")
         navigate('/obrigado')
       }
 
@@ -347,8 +371,24 @@ const handleSubmit=((e)=>{
 
           <div className="linksBackPedidos">
             <div className="linksLogin">
+           
+               
+               
               {
                 logIn ?
+                <>
+                    {
+                      spinner ? <div className="spinner">< Oval
+                        ariaLabel="loading-indicator"
+                        height={100}
+                        width={100}
+                        strokeWidth={5}
+                        strokeWidthSecondary={1}
+                        color="green"
+                        secondaryColor="white"
+                      /></div >
+                        : null}
+
               <div className="formPedidos">
                 <div className="titlePedido">Entrar com e-mail e senha</div>
                 <form onSubmit={btnLogin}>
@@ -356,23 +396,38 @@ const handleSubmit=((e)=>{
                     <div>
                       <label>Email</label>
                       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <small className="error">{emailError}</small>
                     </div>
                     <div>
                       <label>Senha</label>
                       <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <small className="error">{passwordError}</small>    
                     </div>
                   </div>
 
-
+                        <small className="error">{invalid}</small>
                   <input className="btnPedido" type="submit" value="login" />
                 </form>
                 <span className="login_info" onClick={handleLogin}>Não tem uma conta? Cadastre-se</span>
               </div>
+                  </>
                   : null
               }
 
               {
                 logOut ?
+                <>
+                  {
+                    spinner?<div className = "spinner">< Oval
+              ariaLabel="loading-indicator"
+              height={100}
+              width={100}
+              strokeWidth={5}
+              strokeWidthSecondary={1}
+              color="green"
+              secondaryColor="white"
+            /></div >
+              : null}
 
               <div className="formPedidos">
                 <div className="titlePedido">QUERO ME CADASTRAR</div>
@@ -481,6 +536,7 @@ const handleSubmit=((e)=>{
 
                     </div>
                   </div>
+                        <small className="error">{invalid}</small>
                   <div className="formItens">
                     <div>
                       <label>Crie sua Senha de acesso</label>
@@ -498,6 +554,7 @@ const handleSubmit=((e)=>{
                 </form>
                 <span className="login_info" onClick={handleLogout}>Entrar com e-mail e senha</span>
               </div>
+                  </>
                   : null
               }
 
@@ -508,6 +565,18 @@ const handleSubmit=((e)=>{
         {/* section checkout  */}
 
 <section className='compraBases' id={userOrder}>
+          {
+            spinner ? <div className="spinner">< Oval
+              ariaLabel="loading-indicator"
+              height={100}
+              width={100}
+              strokeWidth={5}
+              strokeWidthSecondary={1}
+              color="green"
+              secondaryColor="white"
+            /></div >
+              : null}
+         
           {
             customer !== "" ? <small className='username'>Olá {customer}</small> : null
           }
