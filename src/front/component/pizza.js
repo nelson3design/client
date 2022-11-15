@@ -43,21 +43,13 @@ export default function Pizza(){
         });
       }
 
-  function handleViewProduct() {
-    setShowProduct(false)
-  }
-  function handleView(dados) {
-
-    setShowProduct(true)
-    setView(dados)
-  }
-
-
+  
 
 
   function handleViewProduct() {
     setShowModalComment(false)
     setShowProduct(false)
+localStorage.removeItem("idProduct")
   }
   function handleView(dados) {
     localStorage.setItem("idProduct", JSON.stringify(dados._id));
