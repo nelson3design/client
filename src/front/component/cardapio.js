@@ -50,6 +50,7 @@ export default function Cardapio(){
   function handleViewProduct() {
     setShowModalComment(false)
     setShowProduct(false)
+localStorage.removeItem("idProduct")
   }
   function handleView(dados) {
     localStorage.setItem("idProduct", JSON.stringify(dados._id));
