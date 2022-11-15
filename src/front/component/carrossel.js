@@ -67,6 +67,7 @@ export default function Carrossel() {
   function handleViewProduct(){
     setShowProduct(false)
     setShowModalComment(false)
+    localStorage.removeItem("idProduct")
   }
 
   function handleView(dados){
