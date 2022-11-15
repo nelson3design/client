@@ -34,8 +34,7 @@ const loadName=()=>{
   fetch("https://server-4w73.onrender.com/edit/"+id)
     .then(response=> response.json())
     .then(res=>{
-       
-         console.log(res.file)
+      
         setUpload(res.file)
         setNome(res.nome)
         setDescription(res.description)

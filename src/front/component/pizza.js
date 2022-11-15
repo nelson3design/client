@@ -5,11 +5,15 @@ import "./style/cardapio.css"
 import { Link } from "react-router-dom";
 import Footer from "./footer";
 import { CartContext } from "../context/context"
-import { FaShoppingCart, FaSearchPlus } from "react-icons/fa";
+import { FaShoppingCart, FaSearchPlus, FaStar, FaRegStar } from "react-icons/fa";
 import { Oval } from 'react-loader-spinner'
 import Cart from "./cart";
-
+import Comments from "./comments";
 export default function Pizza(){
+
+  const [showModalComment, setShowModalComment] = useState(false)
+  const [comments, setComments] = useState([])
+
   const [spinner, setSpinner] = useState(true)
   const { showProduct, setShowProduct,carts, handleAdd, handleCart } = useContext(CartContext)
 
@@ -18,7 +22,7 @@ export default function Pizza(){
 
   const url ="https://server-4w73.onrender.com/pizza"
   const url2 ="https://server-4w73.onrender.com/"
-
+  const url3 = "https://server-4w73.onrender.com/product/comments/"
      useEffect(()=>{
   
 
@@ -48,6 +52,49 @@ export default function Pizza(){
     setView(dados)
   }
 
+
+
+
+  function handleViewProduct() {
+    setShowModalComment(false)
+    setShowProduct(false)
+  }
+  function handleView(dados) {
+    localStorage.setItem("idProduct", JSON.stringify(dados._id));
+    setShowProduct(true)
+    setView(dados)
+  }
+  useEffect(() => {
+
+
+    listComment()
+
+  }, [showProduct])
+
+  var idString = localStorage.getItem("idProduct")
+  var idProduct = JSON.parse(idString)
+
+  const listComment = () => {
+    axios.post(`${url3}${idProduct}`).then((response) => {
+      if (response.status == 200) {
+        setComments(response.data)
+        console.log(response.data);
+      }
+
+    });
+
+  }
+
+  const notas = comments.reduce((a, b) => Number(a + Number(b.note)), '')
+  const qtyComment = comments.length
+  const mediaValor = Number((notas / qtyComment).toFixed())
+
+  const totalStars = 5;
+  const activeStars = mediaValor;
+  function handleComment() {
+    setShowModalComment(true)
+  }
+
   
     return(
       <>
@@ -55,10 +102,23 @@ export default function Pizza(){
           showProduct ?
             <div className="view_product_base">
               <div className="close_modal" onClick={handleViewProduct}>&ensp;</div>
+              {
+                showModalComment ?
+                  <div className="view">
+                    <Comments />
+                  </div>
+                  :
               <div className="view">
                 <div className="view_img"><img src={url2 + view.file} alt={url2 + view.file} /></div>
                 <div className="view_info">
                   <div className="title_view">{view.nome}</div>
+                  {[...new Array(totalStars)].map((arr, index) => {
+                    return index < activeStars ? <FaStar /> : <FaRegStar />;
+                  })}
+                  {
+                    activeStars ? <span> {activeStars}/5 CLASSIFICAÇÃO | {qtyComment} AVALIAÇÕES</span> : null
+                  }
+
                   <div className="description_view">{view.description}</div>
                   <div className="cardPreco">
                     <div className="preco">{view.event > 0 ? view.event + " x " : null} R$ {view.preco}</div>
@@ -68,7 +128,35 @@ export default function Pizza(){
                     view.event > 0 ? <div className="btnCart" onClick={handleCart}> ver carrinho</div> : null
                   }
                 </div>
+
+                    <div>
+                      <div className="note">AVALIAÇÕES</div>
+                      {
+                        comments.map((items) => (
+                          <div className="commentContent">
+                            <div className="nome">{items.nome}</div>
+                            <small>{items.email}</small>
+                            <div>
+                              {[...new Array(totalStars)].map((arr, index) => {
+                                return index < Number(items.note) ? <FaStar /> : <FaRegStar />;
+                              })}
+                            </div>
+
+
+                            <div>{items.text}</div>
+                            {
+                              items.file ? <img width='30%' src={url2 + items.file} alt={url2 + items.file} /> : null
+
+                            }
+                          </div>
+                        ))
+                      }
+                    </div>
+                    <h2 className="btnComment" onClick={handleComment}>DEIXE SEU COMENTÁRIO</h2>
               </div>
+
+              
+             }
             </div>
             : null
         }

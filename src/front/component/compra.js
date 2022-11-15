@@ -109,7 +109,7 @@ export default function Compra(){
 
 
 
-    fetch(`https://viacep.com.br//ws/${cep}/json/`)
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then(response => response.json())
       .then(res => {
         setCep(res.cep)
@@ -166,7 +166,24 @@ export default function Compra(){
 
 
     //fim verificar login
+  //const { id } = useParams()
+
+  var idClienteString = localStorage.getItem("idCliente")
+  var costumerString = localStorage.getItem("costumer")
+
+  var idCliente = JSON.parse(idClienteString)
+  var costumer = JSON.parse(costumerString)
  
+  var id = {
+    id: idCliente
+  }
+console.log(id)
+  useEffect(() => {
+    getId()
+    loadCustomer()
+  }, [])
+
+
     const [cepIn, setCepIn] = useState("")
     const [ruaIn, setRuaIn] = useState("")
     const [numeroIn, setNumeroIn] = useState("")
@@ -176,6 +193,26 @@ export default function Compra(){
     const [complementoIn, setComplementoIn] = useState("")
  
 
+
+  const loadCustomer = () => {
+
+
+    axios.post("https://server-4w73.onrender.com/costumer/" ,id).then((res) => {
+      try {
+
+        setCepIn(res.data.user.endereco[0].cep)
+        setRuaIn(res.data.user.endereco[0].rua)
+        setNumeroIn(res.data.user.endereco[0].numero)
+        setBairroIn(res.data.user.endereco[0].bairro)
+        setCidadeIn(res.data.user.endereco[0].cidade)
+        setEstadoIn(res.data.user.endereco[0].estado)
+        setComplementoIn(res.data.user.endereco[0].complemento)
+      } catch (error) {
+      }
+    });
+
+  }
+
     const [valor, setValor] = useState("")
   
   const [beb, setBeb] = useState([])
@@ -183,17 +220,11 @@ export default function Compra(){
 
   const totalAdd = ad.reduce((a, b) => a + b.preco * b.qty, 0)
 
- 
-   
-useEffect(()=>{
-  getId()
-},[])
-
 
 
  
 
-   fetch(`https://viacep.com.br//ws/${cepIn}/json/`)
+   fetch(`https://viacep.com.br/ws/${cepIn}/json/`)
      .then(response => response.json())
      .then(res => {
        setCepIn(res.cep)
@@ -228,14 +259,7 @@ const getId=(()=>{
    
   
     
-const {id} =useParams()
 
-var idClienteString= localStorage.getItem("idCliente")
-var costumerString = localStorage.getItem("costumer")
-
-var idCliente = JSON.parse(idClienteString)
-var costumer = JSON.parse(costumerString)
-   
  // fazer comprar
   const data = {
     costumer: costumer,
@@ -304,8 +328,7 @@ const handleSubmit=((e)=>{
   
         const listBebida=()=>{
           axios.get(`${url3}`).then((response) => {
-            //setBeb(response.data);
-            //console.log(response.data)
+          
             const arr = response.data
             var data = arr.map(obj => ({ ...obj, qty: 0 }))
             setBeb(data);

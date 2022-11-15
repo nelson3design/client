@@ -41,7 +41,7 @@
 
 .baseItens{
     margin: 50px 0 60px 0;
-    width: 100%;
+    width: 90%;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;

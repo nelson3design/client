@@ -6,22 +6,24 @@ import { Link } from "react-router-dom";
 import Footer from "./footer";
 import { CartContext } from "../context/context"
 import Cart from "./cart";
-import { FaShoppingCart, FaSearchPlus } from "react-icons/fa";
-
+import { FaShoppingCart, FaSearchPlus, FaStar, FaRegStar } from "react-icons/fa";
+import Comments from "./comments";
 import { Oval } from 'react-loader-spinner'
 
 export default function Cardapio(){
+  const [showModalComment, setShowModalComment] = useState(false)
+  const [comments, setComments] = useState([])
 
   const { showProduct, setShowProduct, carts, handleAdd, handleCart } = useContext(CartContext)
   const [spinner, setSpinner] = useState(true)
 
-     const [item, setItem] = useState([])
+  const [item, setItem] = useState([])
   const [view, setView] = useState("")
 
 
   const url ="https://server-4w73.onrender.com/hamburguer"
   const url2 ="https://server-4w73.onrender.com/"
-
+  const url3 = "https://server-4w73.onrender.com/product/comments/"
      useEffect(()=>{
   
 
@@ -42,13 +44,47 @@ export default function Cardapio(){
            
         });
       }
+
+
+      
   function handleViewProduct() {
+    setShowModalComment(false)
     setShowProduct(false)
   }
   function handleView(dados) {
-
+    localStorage.setItem("idProduct", JSON.stringify(dados._id));
     setShowProduct(true)
     setView(dados)
+  }
+  useEffect(() => {
+
+
+    listComment()
+
+  }, [showProduct])
+
+  var idString = localStorage.getItem("idProduct")
+  var idProduct = JSON.parse(idString)
+
+  const listComment = () => {
+    axios.post(`${url3}${idProduct}`).then((response) => {
+      if (response.status == 200) {
+        setComments(response.data)
+        console.log(response.data);
+      }
+
+    });
+
+  }
+
+  const notas = comments.reduce((a, b) => Number(a + Number(b.note)), '')
+  const qtyComment = comments.length
+  const mediaValor = Number((notas / qtyComment).toFixed())
+
+  const totalStars = 5;
+  const activeStars = mediaValor;
+  function handleComment() {
+    setShowModalComment(true)
   }
 
 
@@ -59,10 +95,26 @@ export default function Cardapio(){
           showProduct ?
             <div className="view_product_base">
               <div className="close_modal" onClick={handleViewProduct}>&ensp;</div>
+
+              {
+                showModalComment ?
+                  <div className="view">
+                    <Comments />
+                  </div>
+                  :
               <div className="view">
                 <div className="view_img"><img src={url2 + view.file} alt={url2 + view.file} /></div>
                 <div className="view_info">
                   <div className="title_view">{view.nome}</div>
+
+                  {[...new Array(totalStars)].map((arr, index) => {
+                    return index < activeStars ? <FaStar /> : <FaRegStar />;
+                  })}
+                  {
+                    activeStars ? <span> {activeStars}/5 CLASSIFICAÇÃO | {qtyComment} AVALIAÇÕES</span> : null
+                  }
+
+
                   <div className="description_view">{view.description}</div>
                   <div className="cardPreco">
                     <div className="preco">{view.event > 0 ? view.event + " x " : null} R$ {view.preco}</div>
@@ -71,8 +123,35 @@ export default function Cardapio(){
                   {
                     view.event > 0 ? <div className="btnCart" onClick={handleCart}> ver carrinho</div> : null
                   }
+
+                 
                 </div>
+                <div>
+                  <div className="note">AVALIAÇÕES</div>
+                  {
+                    comments.map((items) => (
+                      <div className="commentContent">
+                        <div className="nome">{items.nome}</div>
+                        <small>{items.email}</small>
+                        <div>
+                          {[...new Array(totalStars)].map((arr, index) => {
+                            return index < Number(items.note) ? <FaStar /> : <FaRegStar />;
+                          })}
+                        </div>
+
+
+                        <div>{items.text}</div>
+                        {
+                          items.file ? <img width='30%' src={url2 + items.file} alt={url2 + items.file} /> : null
+
+                        }
+                      </div>
+                    ))
+                  }
+                </div>
+                <h2 className="btnComment" onClick={handleComment}>DEIXE SEU COMENTÁRIO</h2>
               </div>
+         }
             </div>
             : null
         }
@@ -115,7 +194,7 @@ export default function Cardapio(){
             </div>
 
              <div className="cardText">
-                {/* <div className="texts">{dados.description.slice(0,50)+"..."}</div> */}
+                
                  <div className="texts">{dados.description.length < "30" ? dados.description: dados.description.slice(0,60)+"..." }</div>
                 <div className="cardPreco">
                       <div className="preco">{dados.event > 0 ? dados.event + " x " : null} R$ {dados.preco}</div>

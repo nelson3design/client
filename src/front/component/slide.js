@@ -32,7 +32,7 @@ export default function Slide() {
       if (response.status == 200) {
         setSpinner(false)
         setItem(response.data);
-        console.log(response.data)
+       
       }
 
     });
