@@ -33,6 +33,8 @@ export default function Carrossel() {
   const url ="https://server-4w73.onrender.com/destaque"
   const url2 ="https://server-4w73.onrender.com/"
   const url3 = "https://server-4w73.onrender.com/product/comments/"
+
+  const url4 ="https://server-4w73.onrender.com/comments"
  
     useEffect(()=>{
         listItem()
@@ -43,23 +45,34 @@ export default function Carrossel() {
       listComment()
   }, [showProduct])
      
-
+  const [com, setCom] = useState([])
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
+          axios.get(`${url4}`).then((res) =>{
+
+            if (response.status == 200) {
+              const array = res.data
+              const ids = array.map(o => o.idProduct)
+              setSpinner(false)
+              const filtered = array.filter(({ idProduct }, index) => !ids.includes(idProduct, index + 1))
+              const exist = array.filter(({ idProduct }, index) => ids.includes(idProduct, index + 1))
+             setCom(filtered)
+  
+              const arr = response.data
+
             
-          if (response.status == 200) {
-            setSpinner(false)
-    
-            const arr = response.data
-            var data = arr.map(obj => ({ ...obj, event: 0 }))
-            setItem(data);
-          }
+              var data = arr.map(obj => ({ ...obj, event: 0 }))
+              setItem(data);
+             
+
+            } 
+          })
          
         });
        
       }
       
-     
+
      
   const [showModalComment, setShowModalComment] = useState(false)
   const [comments, setComments] = useState([])
@@ -224,19 +237,32 @@ export default function Carrossel() {
 
          {
               
-              item && item.map((dados)=>(
+              item && item.map((dados)=>(           
                 <SwiperSlide>
-                     
+     
             <div className="cardBase">
                 <div className="cardImg" onClick={()=>handleView(dados)}>
                       <div className="view_product"> <FaSearchPlus /></div>
                     <img src={url2+dados.file} alt={url2+dados.file}/>
                     <h3>{dados.nome}</h3>
+                    
+                     
 
                 </div>
 
                 <div className="cardText">               
                     <div className="texts">{dados.description.length < "20" ? dados.description: dados.description.slice(0,20)+"..." }</div>
+                     
+                      {com.map((arr) => {
+                        return (<div>{dados._id == arr.idProduct?
+                           [...new Array(totalStars)].map((arrs, index) => {
+                             return index < arr.note ? <FaStar /> : <FaRegStar />;
+                      })
+
+                           :null}</div>);
+                      })}
+                      
+
                     <div className="cardPreco">
                         <div className="preco">{dados.event>0? dados.event+" x " :null} R$ {dados.preco}</div>
                       <div className="btn" onClick={(e) => handleAdd(dados)}><span>comprar</span></div>
@@ -247,8 +273,8 @@ export default function Carrossel() {
                       
                 </div>
              </div>
-                
-        </SwiperSlide>
+     
+                 </SwiperSlide>
             ))
               
        }
