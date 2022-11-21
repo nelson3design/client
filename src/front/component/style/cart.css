@@ -1,4 +1,6 @@
-
+.stars:nth-child(2){
+    
+}
 .sideContainerOn{
     width: 100%;
     background-color:rgba(76, 76, 77, 0.774);

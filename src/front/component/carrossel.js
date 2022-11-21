@@ -38,6 +38,7 @@ export default function Carrossel() {
  
     useEffect(()=>{
         listItem()
+      listItem2()
         
       },[])
   useEffect(() => {
@@ -48,32 +49,53 @@ export default function Carrossel() {
   const [com, setCom] = useState([])
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
-          axios.get(`${url4}`).then((res) =>{
-
+        
             if (response.status == 200) {
-              const array = res.data
-              const ids = array.map(o => o.idProduct)
               setSpinner(false)
-              const filtered = array.filter(({ idProduct }, index) => !ids.includes(idProduct, index + 1))
-              const exist = array.filter(({ idProduct }, index) => ids.includes(idProduct, index + 1))
-             setCom(filtered)
-  
+            //products
               const arr = response.data
-
-            
               var data = arr.map(obj => ({ ...obj, event: 0 }))
               setItem(data);
              
 
             } 
-          })
-         
+          
         });
        
       }
+  const listItem2 = () => {
+
+    axios.get(`${url4}`).then((res) => {
+
+      if (res.status == 200) {
+        const array = res.data
+
+        setSpinner(false)
+
+
+        //comments
+        var grouped = array.reduce(function (obj, product) {
+          obj[product.idProduct] = obj[product.idProduct] || [];
+          obj[product.idProduct].push(product.note);
+          return obj;
+        }, {});
+
+        var group = Object.keys(grouped).map((key) => {
+          return {
+            idProduct: key,
+            note: grouped[key].reduce((a, b) => Number(a) + Number(b), ''),
+            qty: grouped[key].length,
+            media: Math.round(grouped[key].reduce((a, b) => Number(a) + Number(b), '') / grouped[key].length)
+          }
+        })
+
+        setCom(group)
       
 
-     
+      }
+    })
+  }
+
   const [showModalComment, setShowModalComment] = useState(false)
   const [comments, setComments] = useState([])
 
@@ -244,23 +266,32 @@ export default function Carrossel() {
                 <div className="cardImg" onClick={()=>handleView(dados)}>
                       <div className="view_product"> <FaSearchPlus /></div>
                     <img src={url2+dados.file} alt={url2+dados.file}/>
-                    <h3>{dados.nome}</h3>
-                    
-                     
+                
 
                 </div>
 
-                <div className="cardText">               
+                <div className="cardText">
+
+                      <div>{dados.nome.length < "20" ? dados.nome : dados.nome.slice(0, 20) + "..."}</div> 
+                      <div className="stars">             
+                      {com.map((arr, index) => {
+                        return (
+                        <div>{arr.idProduct === dados._id ?
+                           [...new Array(totalStars)].map((arrs, index) => {
+                             return index < arr.media ? <FaStar /> : <FaRegStar />;
+                           })
+                         
+
+                          : null}</div>
+                          );
+                      })}
+
+                    
+
+                      </div> 
+
                     <div className="texts">{dados.description.length < "20" ? dados.description: dados.description.slice(0,20)+"..." }</div>
                      
-                      {com.map((arr) => {
-                        return (<div>{dados._id == arr.idProduct?
-                           [...new Array(totalStars)].map((arrs, index) => {
-                             return index < arr.note ? <FaStar /> : <FaRegStar />;
-                      })
-
-                           :null}</div>);
-                      })}
                       
 
                     <div className="cardPreco">

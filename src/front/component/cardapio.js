@@ -19,15 +19,17 @@ export default function Cardapio(){
 
   const [item, setItem] = useState([])
   const [view, setView] = useState("")
-
+  const [com, setCom] = useState([])
 
   const url ="https://server-4w73.onrender.com/hamburguer"
   const url2 ="https://server-4w73.onrender.com/"
   const url3 = "https://server-4w73.onrender.com/product/comments/"
+  const url4 = "https://server-4w73.onrender.com/comments"
      useEffect(()=>{
   
 
         listItem()
+         listItem2()
          
       },[])
 
@@ -44,6 +46,39 @@ export default function Cardapio(){
            
         });
       }
+  const listItem2 = () => {
+
+    axios.get(`${url4}`).then((res) => {
+
+      if (res.status == 200) {
+        const array = res.data
+
+        setSpinner(false)
+
+
+        //comments
+        var grouped = array.reduce(function (obj, product) {
+          obj[product.idProduct] = obj[product.idProduct] || [];
+          obj[product.idProduct].push(product.note);
+          return obj;
+        }, {});
+
+        var group = Object.keys(grouped).map((key) => {
+          return {
+            idProduct: key,
+            note: grouped[key].reduce((a, b) => Number(a) + Number(b), ''),
+            qty: grouped[key].length,
+            media: Math.round(grouped[key].reduce((a, b) => Number(a) + Number(b), '') / grouped[key].length)
+          }
+        })
+
+        setCom(group)
+       
+
+      }
+    })
+  }
+
 
 
       
@@ -71,7 +106,7 @@ localStorage.removeItem("idProduct")
     axios.post(`${url3}${idProduct}`).then((response) => {
       if (response.status == 200) {
         setComments(response.data)
-        console.log(response.data);
+      
       }
 
     });
@@ -190,11 +225,20 @@ localStorage.removeItem("idProduct")
                   <div className="cardImg" onClick={() => handleView(dados)}>
                     <div className="view_product"> <FaSearchPlus /></div>
                 <img src={url2+dados.file} alt={url2+dados.file}/>
-                <h3>{dados.nome}</h3>
+               
 
             </div>
 
              <div className="cardText">
+                    <div>{dados.nome.length < "20" ? dados.nome : dados.nome.slice(0, 20) + "..."}</div>
+                    {com.map((arr) => {
+                      return (<div>{dados._id == arr.idProduct ?
+                        [...new Array(totalStars)].map((arrs, index) => {
+                          return index < arr.media ? <FaStar /> : <FaRegStar />;
+                        })
+
+                        : null}</div>);
+                    })}
                 
                  <div className="texts">{dados.description.length < "30" ? dados.description: dados.description.slice(0,60)+"..." }</div>
                 <div className="cardPreco">

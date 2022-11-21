@@ -136,7 +136,7 @@
 .cardText{
     background-color:var(--black) ;
     color: white;
-    height: auto;
+    height: 130px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

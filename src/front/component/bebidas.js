@@ -18,17 +18,18 @@ export default function Bebidas(){
      const [item, setItem] = useState([])
   const [view, setView] = useState("")
 
-
+  const [com, setCom] = useState([])
      const url ="https://server-4w73.onrender.com/bebidas"
      const url2 ="https://server-4w73.onrender.com/"
   const url3 = "https://server-4w73.onrender.com/product/comments/"
-     useEffect(()=>{
-  
+  const url4 = "https://server-4w73.onrender.com/comments"
+  useEffect(() => {
 
-        listItem()
-         
-      },[])
 
+    listItem()
+    listItem2()
+
+  }, [])
       const listItem=()=>{
         axios.get(`${url}`).then((response) => {
           
@@ -42,7 +43,40 @@ export default function Bebidas(){
         });
       }
 
-  
+  const listItem2 = () => {
+
+    axios.get(`${url4}`).then((res) => {
+
+      if (res.status == 200) {
+        const array = res.data
+
+        setSpinner(false)
+
+
+        //comments
+        var grouped = array.reduce(function (obj, product) {
+          obj[product.idProduct] = obj[product.idProduct] || [];
+          obj[product.idProduct].push(product.note);
+          return obj;
+        }, {});
+
+        var group = Object.keys(grouped).map((key) => {
+          return {
+            idProduct: key,
+            note: grouped[key].reduce((a, b) => Number(a) + Number(b), ''),
+            qty: grouped[key].length,
+            media: Math.round(grouped[key].reduce((a, b) => Number(a) + Number(b), '') / grouped[key].length)
+          }
+        })
+
+        setCom(group)
+
+
+      }
+    })
+  }
+
+
 
 
   function handleViewProduct() {
@@ -69,7 +103,7 @@ localStorage.removeItem("idProduct")
     axios.post(`${url3}${idProduct}`).then((response) => {
       if (response.status == 200) {
         setComments(response.data)
-        console.log(response.data);
+        
       }
 
     });
@@ -192,7 +226,15 @@ localStorage.removeItem("idProduct")
             </div>
 
              <div className="cardText">
-                {/* <div className="texts">{dados.description.slice(0,50)+"..."}</div> */}
+                    <div>{dados.nome.length < "20" ? dados.nome : dados.nome.slice(0, 20) + "..."}</div>
+                    {com.map((arr) => {
+                      return (<div>{dados._id == arr.idProduct ?
+                        [...new Array(totalStars)].map((arrs, index) => {
+                          return index < arr.media ? <FaStar /> : <FaRegStar />;
+                        })
+
+                        : null}</div>);
+                    })}
                  <div className="texts">{dados.description.length < "30" ? dados.description: dados.description.slice(0,60)+"..." }</div>
                 <div className="cardPreco">
                       <div className="preco">{dados.event > 0 ? dados.event + " x " : null} R$ {dados.preco}</div>
