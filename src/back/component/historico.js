@@ -146,7 +146,7 @@ export default function Historico() {
                         <div className="btns btn_order">
                           <div className="btns">
                             <div className="btns">
-                              {order.finalizar === "on" ? <button className="entregado">conluido</button> : null}
+                              {order.finalizar === "on" ? <button className="entregado">concluído</button> : null}
                              
 
 
